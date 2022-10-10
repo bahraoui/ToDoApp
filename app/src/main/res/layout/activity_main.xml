@@ -53,7 +53,7 @@
                 android:layout_marginStart="16dp"
                 android:drawableStart="@drawable/ic_baseline_shopping_cart"
                 android:drawablePadding="16dp"
-                android:text="Course"
+                android:text="Courses"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"
