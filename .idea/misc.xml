@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/bouton_background_green1.xml" value="0.1405" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/button_background_blue1.xml" value="0.1" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/button_background_blue2.xml" value="0.1" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_directions_run_24.xml" value="0.1" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_fastfood_24.xml" value="0.1" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_shopping_cart.xml" value="0.1" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_main.xml" value="0.2" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
