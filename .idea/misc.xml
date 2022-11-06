@@ -10,12 +10,16 @@
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/bouton_background_green1.xml" value="0.1405" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/button_background_blue1.xml" value="0.1" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/button_background_blue2.xml" value="0.1" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_autres.xml" value="0.1425" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_directions_run_24.xml" value="0.1" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_fastfood_24.xml" value="0.1" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_shopping_cart.xml" value="0.1" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
-        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_list.xml" value="0.25" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_in_list.xml" value="0.25" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_list.xml" value="0.264" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_sign_in.xml" value="0.24895833333333334" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
       </map>
     </option>
   </component>
