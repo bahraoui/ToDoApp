@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageLogo">
 
         <EditText
-            android:id="@+id/editTextFirstName"
+            android:id="@+id/log_editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -75,7 +75,7 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/log_editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -123,7 +123,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/buttonSignUp"
+            android:id="@+id/buttonSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
