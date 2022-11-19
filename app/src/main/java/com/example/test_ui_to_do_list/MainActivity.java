@@ -16,7 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-
+import com.facebook.FacebookSdk;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -82,14 +82,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
-
-        mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                Toast.makeText(MainActivity.this, "Connexion Reussi!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, List_Activity.class));
-                finish();
-            }
-        });
+        if(!email.isEmpty() || !password.isEmpty()) {
+            mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    Toast.makeText(MainActivity.this, "Connexion Reussi!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, List_Activity.class));
+                    finish();
+                }
+            });
+        }
     }
 }

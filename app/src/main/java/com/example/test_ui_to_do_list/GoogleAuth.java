@@ -61,7 +61,7 @@ public class GoogleAuth extends MainActivity {
 
                 firebaseAuthWithGoogle(account.getIdToken());
         } catch (ApiException e){
-                Toast.makeText(this,""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,""+e.getMessage()+"les identifiants ne sont pas corrects", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
                 finish();
             }
