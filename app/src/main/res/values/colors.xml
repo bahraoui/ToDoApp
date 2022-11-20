@@ -8,4 +8,8 @@
     <color name="background_2">#04103a</color>
     <color name="background_3">#36386f</color>
     <color name="background_4">#66cec8</color>
+    <color name="com_facebook_button_background_color_focused_disabled">#3C5A99</color>
+    <color name="com_facebook_button_background_color_focused">#3C5A99</color>
+    <color name="com_facebook_button_border_color_focused">#3C5A99</color>
+
 </resources>
