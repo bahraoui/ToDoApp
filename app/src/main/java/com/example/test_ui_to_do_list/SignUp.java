@@ -42,9 +42,9 @@ public class SignUp extends AppCompatActivity {
                 String txt_password = password.getText().toString();
 
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
-                    Toast.makeText(SignUp.this, "Entrez vide!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Email ou mot de passe vide !", Toast.LENGTH_SHORT).show();
                 } else if (txt_password.length() < 6) {
-                    Toast.makeText(SignUp.this, "Mot de pass court!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Mot de passe trop court!", Toast.LENGTH_SHORT).show();
                 } else {
                     registerUser(txt_email, txt_password);
                 }
