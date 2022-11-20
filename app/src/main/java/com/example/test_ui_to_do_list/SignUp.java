@@ -29,11 +29,11 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
-        nom = findViewById(R.id.editTextLastName);
-        prenom = findViewById(R.id.editTextFirstName);
-        inscription = findViewById(R.id.buttonSignUp);
-        email = findViewById(R.id.editTextEmail);
-        password = findViewById(R.id.editTextPassword);
+        nom = findViewById(R.id.signup_et_last_name);
+        prenom = findViewById(R.id.signup_et_first_name);
+        inscription = findViewById(R.id.signup_btn_signup);
+        email = findViewById(R.id.signup_et_mail);
+        password = findViewById(R.id.signup_et_password);
 
         inscription.setOnClickListener(new View.OnClickListener() {
             @Override

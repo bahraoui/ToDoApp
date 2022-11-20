@@ -15,15 +15,17 @@
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_fastfood_24.xml" value="0.1" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_shopping_cart.xml" value="0.1" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_forgot_password.xml" value="0.24895833333333334" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_in_list.xml" value="0.25" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_list.xml" value="0.264" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_list_creation.xml" value="0.24895833333333334" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_sign_in.xml" value="0.24895833333333334" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
