@@ -18,18 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Test_UI_To_Do_List"
         tools:targetApi="31">
-        <activity
-            android:name=".GoogleAuth"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity android:name=".List_Activity" />
-        <activity android:name=".FacebookAuth" />
-        <activity
-            android:name=".SignUp"
-            android:exported="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -49,6 +38,23 @@
                 android:name="com.facebook.sdk.ClientToken"
                 android:value="@string/facebook_client_token" />
         </activity>
+
+        <activity
+            android:name=".GoogleAuth"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity android:name=".List_Activity" />
+
+        <activity android:name=".FacebookAuth" />
+
+        <activity
+            android:name=".SignUp"
+            android:exported="true" />
+
     </application>
 
 </manifest>
