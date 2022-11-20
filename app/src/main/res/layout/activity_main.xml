@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageLogo">
 
         <EditText
-            android:id="@+id/log_editTextEmail"
+            android:id="@+id/main_et_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -75,7 +75,7 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/log_editTextPassword"
+            android:id="@+id/main_et_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -100,22 +100,25 @@
 
             android:orientation="horizontal">
 
+            <com.facebook.login.widget.LoginButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
             <ImageView
-                android:id="@+id/imageViewLogoFacebook"
+                android:id="@+id/main_img_logoFacebook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 app:srcCompat="@drawable/facebook" />
 
             <ImageView
-                android:id="@+id/imageViewLogoGoogle"
+                android:id="@+id/main_img_logoGoogle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/google" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textViewSignUp"
+            android:id="@+id/main_tv_SignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Vous n'avez pas de compte ? Inscrivez-vous"
@@ -123,7 +126,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/buttonSignIn"
+            android:id="@+id/main_btn_SignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

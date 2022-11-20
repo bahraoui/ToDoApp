@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -16,7 +17,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.facebook.FacebookSdk;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView fbuser;
     private ImageView guser;
     private Button login;
+    private TextView tvSignUp;
     // Choose an arbitrary request code value
     //private static final int RC_SIGN_IN = 123;
 
@@ -47,13 +48,18 @@ public class MainActivity extends AppCompatActivity {
         //callbackManager = CallbackManager.Factory.create();
 
 
-        // Callback registration
-        guser = findViewById(R.id.imageViewLogoGoogle);
-        fbuser = findViewById(R.id.imageViewLogoFacebook);
-        email = findViewById(R.id.log_editTextEmail);
-        password = findViewById(R.id.log_editTextPassword);
-        login = findViewById(R.id.buttonSignIn);
+        // Connexion
+        guser = findViewById(R.id.main_img_logoGoogle);
+        fbuser = findViewById(R.id.main_img_logoFacebook);
+        email = findViewById(R.id.main_et_email);
+        password = findViewById(R.id.main_et_password);
+        login = findViewById(R.id.main_btn_SignIn);
 
+        // Inscription
+        tvSignUp = findViewById(R.id.main_tv_SignUp);
+
+
+        // Voir classe "FacebookAuth" pour la connexion a facebook
         fbuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Voir classe "GoogleAuth" pour la connexion a google
         guser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,12 +78,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // connexion avec l'email et le passsword
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
                 loginUser(txt_email, txt_password);
+            }
+        });
+
+        // inscription
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignUp.class);
+                startActivity(intent);
             }
         });
     }
