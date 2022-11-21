@@ -46,10 +46,15 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        //Toast.makeText(MainActivity.this, "etape 1", Toast.LENGTH_SHORT).show();
+/*
+        if(currentUser != null) {
+            currentUser.;
             startActivity(new Intent(this, List_Activity.class));
-            finish();
+            Toast.makeText(MainActivity.this, "etape 2", Toast.LENGTH_SHORT).show();
+            //finish();
         }
+*/
         //Initialisation du SDK Facebook
         //callbackManager = CallbackManager.Factory.create();
 
