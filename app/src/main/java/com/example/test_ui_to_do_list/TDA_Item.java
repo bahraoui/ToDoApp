@@ -1,14 +1,11 @@
 package com.example.test_ui_to_do_list;
 
-import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class TDA_Item {
     private static int counter = 0;
-    private TextView it_Name;
+    private String it_Name;
     private Date it_ObjectifDate;
     private boolean isFinished;
     private boolean isOutdated;
@@ -31,7 +28,7 @@ public class TDA_Item {
         this.id = counter++;
     }
 
-    public TDA_Item(TextView themeName, Date newDate){
+    public TDA_Item(String themeName, Date newDate){
         this.it_Name = themeName;
         this.isFinished = false;
         this.isOutdated = false;
@@ -41,11 +38,11 @@ public class TDA_Item {
 
 
     // getters and setters :
-    public TextView getIt_Name() {
+    public String getIt_Name() {
         return it_Name;
     }
 
-    public void setIt_Name(TextView it_Name) {
+    public void setIt_Name(String it_Name) {
         this.it_Name = it_Name;
     }
 
