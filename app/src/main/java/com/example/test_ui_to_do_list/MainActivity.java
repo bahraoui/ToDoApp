@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,14 +48,13 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //Toast.makeText(MainActivity.this, "etape 1", Toast.LENGTH_SHORT).show();
-/*
+
         if(currentUser != null) {
-            currentUser.;
+//            currentUser.reauthenticate(currentUser.get);
             startActivity(new Intent(this, List_Activity.class));
-            Toast.makeText(MainActivity.this, "etape 2", Toast.LENGTH_SHORT).show();
             //finish();
         }
-*/
+
         //Initialisation du SDK Facebook
         //callbackManager = CallbackManager.Factory.create();
 
@@ -119,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
             });
+            Toast.makeText(MainActivity.this, "Probleme de connexion", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(MainActivity.this, "Email ou MDP vide", Toast.LENGTH_SHORT).show();
         }
     }
 }
