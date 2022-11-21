@@ -47,7 +47,11 @@
                 android:value="" />
         </activity>
 
-        <activity android:name=".List_Activity" />
+        <activity android:name=".List_Activity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ListCreationActivity"
+            android:exported="true"
+            android:parentActivityName=".List_Activity"/>
 
         <activity android:name=".FacebookAuth" />
 

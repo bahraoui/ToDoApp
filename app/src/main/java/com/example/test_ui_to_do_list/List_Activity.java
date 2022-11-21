@@ -3,9 +3,7 @@ package com.example.test_ui_to_do_list;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,9 +29,9 @@ public class List_Activity extends AppCompatActivity {
 
         btn_AddNewList = findViewById(R.id.list_tv_add);
         btn_AddNewList.setOnClickListener(v -> {
-            startActivity(new Intent(this, listCreationActivity.class));
+            Intent intent = new Intent(this, ListCreationActivity.class);
+            startActivity(intent);
         });
-
 
     }
 }

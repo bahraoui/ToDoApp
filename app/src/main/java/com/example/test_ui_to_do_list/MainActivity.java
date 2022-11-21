@@ -115,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(AuthResult authResult) {
                     Toast.makeText(MainActivity.this, "Connexion Reussi!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, List_Activity.class));
-                    finish();
+                    Intent intent = new Intent(MainActivity.this, List_Activity.class);
+                    startActivity(intent);
                 }
             });
             Toast.makeText(MainActivity.this, "Probleme de connexion", Toast.LENGTH_SHORT).show();

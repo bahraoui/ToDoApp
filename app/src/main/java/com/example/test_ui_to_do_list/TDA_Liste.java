@@ -10,9 +10,6 @@ public class TDA_Liste {
     private TextView li_Name;
     private int id;
 
-
-
-
     // constructors :
     public TDA_Liste(){
         this.li_List = new ArrayList<TDA_Item>();
