@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,6 +58,13 @@ public class List_Activity extends AppCompatActivity {
 
         TextView txt = view.findViewById(R.id.myView_element_1_name);
         txt.setText(tda_liste.getLi_Name());
+        txt.setOnLongClickListener(v -> {
+            Toast.makeText(this, "SUCCES", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, InListActivity.class);
+            intent.putExtra("titreListe",tda_liste.getLi_Name());
+            startActivity(intent);
+            return true;
+        });
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);

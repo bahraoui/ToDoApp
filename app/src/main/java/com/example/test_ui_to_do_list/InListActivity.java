@@ -16,6 +16,12 @@ public class InListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_list);
         tv_TitleList = findViewById(R.id.inlist_tv_title);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String titre = extras.getString("titreListe");
+            tv_TitleList.setText(titre);
+            //The key argument here must match that used in the other activity
+        }
 
         TDA_Liste listeExemple = new TDA_Liste("nomTest");
         listeExemple.addItem(new TDA_Item("Item1", Calendar.getInstance().getTime()));
