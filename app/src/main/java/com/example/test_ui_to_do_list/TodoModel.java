@@ -20,7 +20,7 @@ public class TodoModel {
         this.status = status;
     }
 
-    public int getTask() {
+    public String getTask() {
         return task;
     }
 

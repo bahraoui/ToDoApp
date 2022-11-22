@@ -72,7 +72,7 @@ public class TodoVue extends RecyclerView.Adapter<TodoVue.ViewHolder> {
     public void editItem(int position){
         TodoModel item = todolist.get(position);
         Bundle bundle = new Bundle();
-        bundle.putInt("id", item.getTask());
+        bundle.putInt("id", item.getId());
         AddTask fragment = new AddTask();
         fragment.setArguments(bundle);
         fragment.show(activity_in_list.getSupportFragmentManager(), AddTask.TAG);

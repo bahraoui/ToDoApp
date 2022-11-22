@@ -25,7 +25,7 @@ public class Activity_in_List extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_in_list_TEMPLATE);
+        setContentView(R.layout.activity_in_list_template);
 
         db = new Database(this);
         db.openDatabase();
@@ -50,7 +50,6 @@ public class Activity_in_List extends AppCompatActivity {
 
     }
 
-    @Override
     public void handleDialogClose(DialogInterface dialogInterface){
         taskList = db.getAllTasks();
         Collections.reverse(taskList);
