@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser != null) {
 //            currentUser.reauthenticate(currentUser.get);
             startActivity(new Intent(this, List_Activity.class));
-            //finish();
+            finish();
         }
 
         //Initialisation du SDK Facebook
@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                email = findViewById(R.id.main_et_email);
+                password = findViewById(R.id.main_et_password);
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
                 loginUser(txt_email, txt_password);
