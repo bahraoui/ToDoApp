@@ -37,7 +37,8 @@ public class ListCreationActivity extends AppCompatActivity {
         btn_CreateNewList = findViewById(R.id.signup_btn_create);
 
         btn_CreateNewList.setOnClickListener(v -> {
-            name_NewList = et.getText().toString();
+            EditText tmp = findViewById(R.id.listcreation_et_name);
+            name_NewList = tmp.getText().toString();
             if (name_NewList.isEmpty()) {
                 Toast.makeText(this, "Nom de liste vide", Toast.LENGTH_SHORT).show();
                 return;
