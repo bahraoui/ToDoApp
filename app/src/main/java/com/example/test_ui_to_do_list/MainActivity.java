@@ -126,9 +126,13 @@ public class MainActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                Toast.makeText(MainActivity.this, "SUCCES", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MainActivity.this, List_Activity.class);
+                                startActivity(intent);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(MainActivity.this, "FAIL", Toast.LENGTH_SHORT).show();
                                 Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -142,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });*/
-            Toast.makeText(MainActivity.this, "Probleme de connexion", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "DEBUG LOG", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(MainActivity.this, "Email ou MDP vide", Toast.LENGTH_SHORT).show();
         }
