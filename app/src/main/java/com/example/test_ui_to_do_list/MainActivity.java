@@ -1,9 +1,12 @@
 package com.example.test_ui_to_do_list;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -13,11 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -113,6 +118,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void loginUser(String email, String password) {
         if(!email.isEmpty() && !password.isEmpty()) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+            /*
             mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
@@ -120,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, List_Activity.class);
                     startActivity(intent);
                 }
-            });
+            });*/
             Toast.makeText(MainActivity.this, "Probleme de connexion", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(MainActivity.this, "Email ou MDP vide", Toast.LENGTH_SHORT).show();
