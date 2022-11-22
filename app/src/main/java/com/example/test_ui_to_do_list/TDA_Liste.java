@@ -8,6 +8,11 @@ public class TDA_Liste {
     private String li_Name;
     private int id;
 
+
+    public void addItem(TDA_Item item){
+        li_List.add(item);
+    }
+
     // constructors :
     public TDA_Liste(){
         this.li_List = new ArrayList<>();

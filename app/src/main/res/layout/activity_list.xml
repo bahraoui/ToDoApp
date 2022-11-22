@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <TextView
-            android:id="@+id/elementcreation_tv_title"
+            android:id="@+id/inlist_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
@@ -238,7 +238,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/elementcreation_tv_title">
+            app:layout_constraintTop_toBottomOf="@+id/inlist_tv_title">
 
 
         </LinearLayout>

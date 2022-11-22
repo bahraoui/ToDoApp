@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
-        android:drawableStart="@drawable/ic_baseline_account_balance_24"
+        android:drawableStart="@drawable/ic_autres"
         android:drawablePadding="16dp"
         android:fontFamily="sans-serif-black"
         android:text="Rendez-vous Banque"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-<!-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/elementcreation_tv_title">
+        app:layout_constraintTop_toBottomOf="@+id/inlist_tv_title">
 
         <TextView
             android:id="@+id/list_tv_element_1_name"
@@ -122,7 +122,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-<-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutElement3"
         android:layout_width="55dp"
