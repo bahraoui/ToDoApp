@@ -60,7 +60,7 @@ public class List_Activity extends AppCompatActivity {
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(30, 20, 30, 0);
+        layoutParams.setMargins(50, 50, 50, 0);
 
         ViewGroup main = findViewById(R.id.list_constLayout_insertPoint);
         main.addView(view, layoutParams);
