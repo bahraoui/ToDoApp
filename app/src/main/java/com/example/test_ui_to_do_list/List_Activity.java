@@ -31,7 +31,7 @@ public class List_Activity extends AppCompatActivity {
             finish();
         }
 
-        btn_AddNewList = findViewById(R.id.list_tv_add);
+        //btn_AddNewList = findViewById(R.id.list_tv_add);
         btn_AddNewList.setOnClickListener(v -> {
             Intent intent = new Intent(this, ListCreationActivity.class);
             startActivity(intent);
@@ -49,7 +49,7 @@ public class List_Activity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(30, 20, 30, 0);
         txt.setText(tda_liste.getLi_Name());
-        ViewGroup main = findViewById(R.id.list_constLayout_insertPoint);
-        main.addView(view, layoutParams);
+        //ViewGroup main = findViewById(R.id.list_constLayout_insertPoint);
+       // main.addView(view, layoutParams);
     }
 }

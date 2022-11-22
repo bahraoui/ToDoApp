@@ -1,5 +1,7 @@
 package com.example.test_ui_to_do_list;
 
+import com.example.test_ui_to_do_list.TDA_Item;
+
 import java.util.ArrayList;
 
 public class TDA_Liste {

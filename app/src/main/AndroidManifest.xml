@@ -22,6 +22,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,6 +53,9 @@
         <activity android:name=".ListCreationActivity"
             android:exported="true"
             android:parentActivityName=".List_Activity"/>
+        <activity
+            android:name=".Activity_in_List"
+            android:exported="true"/>
 
         <activity android:name=".FacebookAuth" />
 
