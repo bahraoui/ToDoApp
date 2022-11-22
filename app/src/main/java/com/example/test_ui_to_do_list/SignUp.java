@@ -38,6 +38,8 @@ public class SignUp extends AppCompatActivity {
         inscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                email = findViewById(R.id.signup_et_mail);
+                password = findViewById(R.id.signup_et_password);
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
 
