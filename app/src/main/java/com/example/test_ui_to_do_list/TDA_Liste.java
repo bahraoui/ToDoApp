@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class TDA_Liste {
     private static int counter = 0;
     private ArrayList<TDA_Item> li_List;
+    private String li_desc;
+    private boolean li_isFinish;
     private String li_Name;
     private int id;
 

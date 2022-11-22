@@ -14,10 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 public class List_Activity extends AppCompatActivity {
 
     private TextView btn_AddNewList;
     private FirebaseAuth mAuth;
+    private DBHandlerList dbList;
+    private int nbViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,20 +29,26 @@ public class List_Activity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_list);
         mAuth = FirebaseAuth.getInstance();
+        nbViews = 0;
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
 
+        dbList = new DBHandlerList(this);
         btn_AddNewList = findViewById(R.id.list_tv_add);
         btn_AddNewList.setOnClickListener(v -> {
             Intent intent = new Intent(this, ListCreationActivity.class);
             startActivity(intent);
         });
 
+
+        majUI();
+        /*
         addListUI(new TDA_Liste("nomTEST"));
         addListUI(new TDA_Liste("nomTEST2"));
+        */
     }
 
     private void addListUI(TDA_Liste tda_liste){
@@ -51,5 +61,33 @@ public class List_Activity extends AppCompatActivity {
         txt.setText(tda_liste.getLi_Name());
         ViewGroup main = findViewById(R.id.list_constLayout_insertPoint);
         main.addView(view, layoutParams);
+        nbViews++;
+    }
+
+    private void majUI(){
+        ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
+
+        for (int i = nbViews; i < toutes_listes.size(); i++){
+            addListUI(toutes_listes.get(i));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbList.close();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dbList.close();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dbList = new DBHandlerList(this);
+        majUI();
     }
 }

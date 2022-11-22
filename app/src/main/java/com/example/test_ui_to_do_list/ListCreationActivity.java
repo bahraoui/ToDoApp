@@ -15,9 +15,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class ListCreationActivity extends AppCompatActivity {
 
-    private EditText name_NewList;
+    private String name_NewList;
     private Button btn_CreateNewList;
     private FirebaseAuth mAuth;
+    private DBHandlerList dbList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,12 +26,47 @@ public class ListCreationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_creation);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser == null){
+        if (currentUser == null) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
 
-        name_NewList = findViewById(R.id.listcreation_et_name);
+        dbList = new DBHandlerList(this);
+        EditText et = findViewById(R.id.listcreation_et_name);
+        name_NewList = et.getText().toString();
         btn_CreateNewList = findViewById(R.id.signup_btn_create);
+
+        btn_CreateNewList.setOnClickListener(v -> {
+            name_NewList = et.getText().toString();
+            if (name_NewList.isEmpty()) {
+                Toast.makeText(this, "Nom de liste vide", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            dbList.addNewList(name_NewList, false, "");
+            Toast.makeText(this, "liste "+name_NewList+" ajoutee", Toast.LENGTH_SHORT).show();
+            dbList.close();
+            finish();
+        });
+
+
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbList.close();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dbList.close();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dbList = new DBHandlerList(this);
+    }
+
 }
