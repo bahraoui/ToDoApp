@@ -32,10 +32,13 @@ public class List_Activity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         nbViews = 0;
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        /*
+
         if(currentUser == null){
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
+        */
 
         dbList = new DBHandlerList(this);
         btn_AddNewList = findViewById(R.id.list_tv_add);

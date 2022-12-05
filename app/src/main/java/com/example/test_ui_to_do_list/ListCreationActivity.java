@@ -26,10 +26,12 @@ public class ListCreationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_creation);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        /*
         if (currentUser == null) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
+        */
 
         dbList = new DBHandlerList(this);
         EditText et = findViewById(R.id.listcreation_et_name);

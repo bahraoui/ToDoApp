@@ -118,6 +118,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void loginUser(String email, String password) {
         if(!email.isEmpty() && !password.isEmpty()) {
+
+            // forcage de connexion :
+            Toast.makeText(MainActivity.this, "SUCCES", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, List_Activity.class);
+            startActivity(intent);
+            finish();
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
