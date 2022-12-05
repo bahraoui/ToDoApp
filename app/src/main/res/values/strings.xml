@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Test_UI_To_Do_List</string>
+    <string name="app_name">ToDo APP</string>
     <string name="title_activity_main">MainActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -14,6 +14,8 @@
     <string name="facebook_app_id">5559146564170523</string>
     <string name="fb_login_protocol_scheme">fb5559146564170523</string>
     <string name="facebook_client_token">b9192c5b1e796d554be92b6c6e85708d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

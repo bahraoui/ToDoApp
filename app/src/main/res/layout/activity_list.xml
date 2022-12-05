@@ -7,12 +7,13 @@
     android:background="#1b2547">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/FrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/button_background_blue1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -228,7 +229,7 @@
         </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
+            android:id="@+id/returnButton"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginEnd="16dp"
@@ -253,7 +254,39 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/fragmentListBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/fragment_button"
+            app:srcCompat="@drawable/ic_list_blue" />
+
+        <ImageButton
+            android:id="@+id/fragmentAccountBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/fragment_button"
+            app:srcCompat="@drawable/ic_user" />
+
+        <ImageButton
+            android:id="@+id/fragmentSettingsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/fragment_button"
+            app:srcCompat="@drawable/ic_settings" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
