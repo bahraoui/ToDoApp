@@ -38,12 +38,21 @@ public class TDA_Item {
 
 
     // getters and setters :
+
     public String getIt_Name() {
         return it_Name;
     }
 
     public void setIt_Name(String it_Name) {
         this.it_Name = it_Name;
+    }
+
+    public Date getIt_ObjectifDate() {
+        return it_ObjectifDate;
+    }
+
+    public void setIt_ObjectifDate(Date it_ObjectifDate) {
+        this.it_ObjectifDate = it_ObjectifDate;
     }
 
     public boolean isFinished() {
@@ -54,7 +63,19 @@ public class TDA_Item {
         isFinished = finished;
     }
 
+    public boolean isOutdated() {
+        return isOutdated;
+    }
+
+    public void setOutdated(boolean outdated) {
+        isOutdated = outdated;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

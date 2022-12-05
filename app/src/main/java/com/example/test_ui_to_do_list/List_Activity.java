@@ -11,13 +11,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -29,6 +39,9 @@ public class List_Activity extends AppCompatActivity {
     private int nbViews;
 
     ImageButton fragmentListBtn, fragmentAccountBtn, fragmentSettingsBtn;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference listesRef = db.collection("Listes");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +103,7 @@ public class List_Activity extends AppCompatActivity {
         });
 
 
-        majUI();
+        //majUI();
         /*
         addListUI(new TDA_Liste("nomTEST"));
         addListUI(new TDA_Liste("nomTEST2"));
@@ -102,7 +115,39 @@ public class List_Activity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.FrameLayout,parFragment);
         fragmentTransaction.commit();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //majUI();
+        listesRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null || value.getMetadata().isFromCache()){
+                    return;
+                }
+
+                for (DocumentChange dc : value.getDocumentChanges()) {
+                    DocumentSnapshot dcs = dc.getDocument();
+
+                    switch (dc.getType()){
+                        case ADDED:
+                            Toast.makeText(List_Activity.this, "added", Toast.LENGTH_SHORT).show();
+                            majUI();
+                            break;
+                        case REMOVED:
+                            Toast.makeText(List_Activity.this, "removed", Toast.LENGTH_SHORT).show();
+                            majUI();
+                            break;
+                        case MODIFIED:
+                            Toast.makeText(List_Activity.this, "modified", Toast.LENGTH_SHORT).show();
+                            majUI();
+                            break;
+                    }
+                }
+            }
+        });
     }
 
     private void addListUI(TDA_Liste tda_liste){
@@ -111,6 +156,8 @@ public class List_Activity extends AppCompatActivity {
 
         TextView txt = view.findViewById(R.id.myView_element_1_name);
         txt.setText(tda_liste.getLi_Name());
+        txt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_autres,0,0,0);
+
         txt.setOnLongClickListener(v -> {
             Toast.makeText(this, "SUCCES", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, InListActivity.class);
@@ -129,11 +176,30 @@ public class List_Activity extends AppCompatActivity {
     }
 
     private void majUI(){
-        ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
+        //ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
+        ViewGroup main = findViewById(R.id.list_constLayout_insertPoint);
+        main.removeAllViews();
+        listesRef.get().isCanceled();
+        listesRef.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
+                            TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
+                            if (liste_tmp != null){
+                                liste_tmp.setId(dcs.getId());
 
+                                addListUI(liste_tmp);
+                            }
+                        }
+                    }
+                });
+
+/*
         for (int i = nbViews; i < toutes_listes.size(); i++){
             addListUI(toutes_listes.get(i));
         }
+*/
     }
 
     @Override
@@ -153,5 +219,12 @@ public class List_Activity extends AppCompatActivity {
         super.onResume();
         dbList = new DBHandlerList(this);
         majUI();
+        Toast.makeText(this, "onResume List activity", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(this, "onPause list activity", Toast.LENGTH_SHORT).show();
     }
 }

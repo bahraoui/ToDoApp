@@ -116,14 +116,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void forcageConnexion(){
+        // forcage de connexion :
+        Toast.makeText(MainActivity.this, "SUCCES", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, List_Activity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void loginUser(String email, String password) {
         if(!email.isEmpty() && !password.isEmpty()) {
+            //Cette fonction ne sert qu'a debug
+            //forcageConnexion();
 
-            // forcage de connexion :
-            Toast.makeText(MainActivity.this, "SUCCES", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, List_Activity.class);
-            startActivity(intent);
-            finish();
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -155,6 +160,16 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(MainActivity.this, "DEBUG LOG", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(MainActivity.this, "Email ou MDP vide", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null) {
+            startActivity(new Intent(this, List_Activity.class));
+            finish();
         }
     }
 }
