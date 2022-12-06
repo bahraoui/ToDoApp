@@ -43,6 +43,7 @@ public class List_Activity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference listesRef = db.collection("Listes");
+    private final AtomicBoolean isFirstLaunch = new AtomicBoolean(true);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,36 +124,47 @@ public class List_Activity extends AppCompatActivity {
         super.onStart();
         //majUI();
         final AtomicBoolean isFirstListener = new AtomicBoolean(true);
-        listesRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null || value.getMetadata().isFromCache()){
-                    return;
-                }
+        //if(isFirstLaunch.get()){
+            Toast.makeText(this, "first launch", Toast.LENGTH_SHORT).show();
+            listesRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    if (error != null || value.getMetadata().isFromCache()){
+                        return;
+                    }
 
-                for (DocumentChange dc : value.getDocumentChanges()) {
-                    DocumentSnapshot dcs = dc.getDocument();
+                    for (DocumentChange dc : value.getDocumentChanges()) {
+                        DocumentSnapshot dcs = dc.getDocument();
 
-                    switch (dc.getType()){
-                        case ADDED:
-                            Toast.makeText(List_Activity.this, "added", Toast.LENGTH_SHORT).show();
-                            majUI();
-                            break;
-                        case REMOVED:
-                            Toast.makeText(List_Activity.this, "removed", Toast.LENGTH_SHORT).show();
-                            majUI();
-                            break;
-                        case MODIFIED:
-                            Toast.makeText(List_Activity.this, "modified", Toast.LENGTH_SHORT).show();
-                            majUI();
-                            break;
+                        switch (dc.getType()){
+                            case ADDED:
+                                Toast.makeText(List_Activity.this, "added", Toast.LENGTH_SHORT).show();
+                                if (isFirstLaunch.get()){
+                                    majUI();
+                                }
+                                break;
+                            case REMOVED:
+                                Toast.makeText(List_Activity.this, "removed", Toast.LENGTH_SHORT).show();
+                                majUI();
+                                break;
+                            case MODIFIED:
+                                Toast.makeText(List_Activity.this, "modified", Toast.LENGTH_SHORT).show();
+                                majUI();
+                                break;
+                        }
                     }
                 }
-            }
-        });
+            });
+        isFirstLaunch.set(false);
+            /*
+        } else {
+            Toast.makeText(this, "not first launch", Toast.LENGTH_SHORT).show();
+            //majUI();
+        }
+*/
     }
 
-    private void addListUI(TDA_Liste tda_liste){
+    synchronized private void addListUI(TDA_Liste tda_liste){
         LayoutInflater li = getLayoutInflater();
         View view = li.inflate(R.layout.my_view_list, null);
 
@@ -181,7 +193,7 @@ public class List_Activity extends AppCompatActivity {
         //ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
         ViewGroup main = findViewById(R.id.list_constLayout_insertPoint);
         main.removeAllViews();
-        listesRef.get().isCanceled();
+
         listesRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -220,6 +232,14 @@ public class List_Activity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         dbList = new DBHandlerList(this);
+        /*
+        if(isFirstLaunch.get()){
+            Toast.makeText(this, "first launch", Toast.LENGTH_SHORT).show();
+            isFirstLaunch.set(false);
+        } else {
+            Toast.makeText(this, "not first launch", Toast.LENGTH_SHORT).show();
+            majUI();
+        }*/
         majUI();
         Toast.makeText(this, "onResume List activity", Toast.LENGTH_SHORT).show();
     }
