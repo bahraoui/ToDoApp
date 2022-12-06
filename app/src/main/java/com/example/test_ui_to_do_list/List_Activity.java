@@ -1,5 +1,6 @@
 package com.example.test_ui_to_do_list;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class List_Activity extends AppCompatActivity {
     private int nbViews;
 
     ImageButton fragmentListBtn, fragmentAccountBtn, fragmentSettingsBtn;
+    Dialog popup;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference listesRef = db.collection("Listes");
@@ -54,6 +56,9 @@ public class List_Activity extends AppCompatActivity {
         fragmentListBtn = findViewById(R.id.fragmentListBtn);
         fragmentAccountBtn = findViewById(R.id.fragmentAccountBtn);
         fragmentSettingsBtn = findViewById(R.id.fragmentSettingsBtn);
+        popup = new Dialog(this);
+
+        showPopUp();
 
         fragmentListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,5 +253,18 @@ public class List_Activity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Toast.makeText(this, "onPause list activity", Toast.LENGTH_SHORT).show();
+    }
+
+    public void showPopUp() {
+        TextView close;
+        popup.setContentView(R.layout.popup);
+        close = (TextView) popup.findViewById(R.id.closeWindows);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popup.dismiss();
+            }
+        });
+        popup.show();
     }
 }
