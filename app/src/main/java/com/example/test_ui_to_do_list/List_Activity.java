@@ -30,6 +30,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class List_Activity extends AppCompatActivity {
 
@@ -121,6 +122,7 @@ public class List_Activity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         //majUI();
+        final AtomicBoolean isFirstListener = new AtomicBoolean(true);
         listesRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -175,7 +177,7 @@ public class List_Activity extends AppCompatActivity {
         nbViews++;
     }
 
-    private void majUI(){
+    synchronized private void majUI(){
         //ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
         ViewGroup main = findViewById(R.id.list_constLayout_insertPoint);
         main.removeAllViews();
