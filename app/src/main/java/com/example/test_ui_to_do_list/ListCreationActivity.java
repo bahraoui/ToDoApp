@@ -62,12 +62,16 @@ public class ListCreationActivity extends AppCompatActivity {
             Toast.makeText(this, "Nom de liste vide", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // ajout sql
         dbList.addNewList(name_NewList, false, "");
 
         // ajout firebase
         DocumentReference refAdded;
         refAdded = listesRef.document();
-        refAdded.set(new TDA_Liste(name_NewList));
+        TDA_Liste new_liste = new TDA_Liste(name_NewList);
+        new_liste.setId(refAdded.getId());
+        refAdded.set(new_liste);
 
 
         //listesRef.add(new TDA_Liste(name_NewList));
