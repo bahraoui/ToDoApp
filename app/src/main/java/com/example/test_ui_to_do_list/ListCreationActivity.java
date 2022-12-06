@@ -1,11 +1,9 @@
 package com.example.test_ui_to_do_list;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,8 +14,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.json.JSONStringer;
 
 import io.grpc.internal.JsonParser;
 
@@ -44,7 +40,7 @@ public class ListCreationActivity extends AppCompatActivity {
         }
 
         dbList = new DBHandlerList(this);
-        EditText et = findViewById(R.id.mail);
+        EditText et = findViewById(R.id.listcreation_et_name);
         name_NewList = et.getText().toString();
         btn_CreateNewList = findViewById(R.id.signup_btn_create);
 

@@ -57,7 +57,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/mail"
+            android:id="@+id/listcreation_et_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
@@ -86,7 +86,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mail" />
+            app:layout_constraintTop_toBottomOf="@+id/listcreation_et_name" />
 
         <LinearLayout
             android:layout_width="wrap_content"
