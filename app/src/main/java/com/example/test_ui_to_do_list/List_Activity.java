@@ -3,6 +3,7 @@ package com.example.test_ui_to_do_list;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class List_Activity extends AppCompatActivity {
@@ -45,6 +48,10 @@ public class List_Activity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference listesRef = db.collection("Listes");
+    private CollectionReference userListes = db.collection("ListesID");
+    private HashMap<String, String> listeIdentifiantsUser_hashmap = new HashMap<String,String>();
+    private ArrayList<String> listeIdentifiantsUser = new ArrayList<>();
+    private ArrayList<String> listeIdentifiantsUser_uid = new ArrayList<>();
     private final AtomicBoolean isFirstLaunch = new AtomicBoolean(true);
 
     @Override
@@ -94,6 +101,7 @@ public class List_Activity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         nbViews = 0;
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        mAuth.getCurrentUser().getUid();
         /*
 
         if(currentUser == null){
@@ -111,6 +119,13 @@ public class List_Activity extends AppCompatActivity {
 
 
         //majUI();
+        majListeUser();
+        majListeUser();
+        majListeUser();
+        majListeUser();
+        majListeUser();
+        majListeUser();
+        majListeUser();
         /*
         addListUI(new TDA_Liste("nomTEST"));
         addListUI(new TDA_Liste("nomTEST2"));
@@ -130,37 +145,40 @@ public class List_Activity extends AppCompatActivity {
         //majUI();
         final AtomicBoolean isFirstListener = new AtomicBoolean(true);
         //if(isFirstLaunch.get()){
-            Toast.makeText(this, "first launch", Toast.LENGTH_SHORT).show();
-            listesRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                    if (error != null || value.getMetadata().isFromCache()){
-                        return;
-                    }
+        EventListener<QuerySnapshot> eventListenerUpdateListe = new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null || value.getMetadata().isFromCache()){
+                    return;
+                }
 
-                    for (DocumentChange dc : value.getDocumentChanges()) {
-                        DocumentSnapshot dcs = dc.getDocument();
+                for (DocumentChange dc : value.getDocumentChanges()) {
+                    DocumentSnapshot dcs = dc.getDocument();
 
-                        switch (dc.getType()){
-                            case ADDED:
-                                Toast.makeText(List_Activity.this, "added", Toast.LENGTH_SHORT).show();
-                                if (isFirstLaunch.get()){
-                                    majUI();
-                                }
-                                break;
-                            case REMOVED:
-                                Toast.makeText(List_Activity.this, "removed", Toast.LENGTH_SHORT).show();
+                    switch (dc.getType()){
+                        case ADDED:
+                            Toast.makeText(List_Activity.this, "added", Toast.LENGTH_SHORT).show();
+                            if (isFirstLaunch.get()){
                                 majUI();
-                                break;
-                            case MODIFIED:
-                                Toast.makeText(List_Activity.this, "modified", Toast.LENGTH_SHORT).show();
-                                majUI();
-                                break;
-                        }
+                            }
+                            break;
+                        case REMOVED:
+                            Toast.makeText(List_Activity.this, "removed", Toast.LENGTH_SHORT).show();
+                            majListeUser();
+                            majUI();
+                            break;
+                        case MODIFIED:
+                            Toast.makeText(List_Activity.this, "modified", Toast.LENGTH_SHORT).show();
+                            majListeUser();
+                            majUI();
+                            break;
                     }
                 }
-            });
+            }
+        };
         isFirstLaunch.set(false);
+        listesRef.addSnapshotListener(this, eventListenerUpdateListe);
+        userListes.addSnapshotListener(this, eventListenerUpdateListe);
             /*
         } else {
             Toast.makeText(this, "not first launch", Toast.LENGTH_SHORT).show();
@@ -180,7 +198,7 @@ public class List_Activity extends AppCompatActivity {
         txt.setOnLongClickListener(v -> {
             Toast.makeText(this, "SUCCES", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, InListActivity.class);
-            intent.putExtra("titreListe",tda_liste.getLi_Name());
+            intent.putExtra("tda_liste",tda_liste);
             startActivity(intent);
             return true;
         });
@@ -205,13 +223,28 @@ public class List_Activity extends AppCompatActivity {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
                             TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
-                            if (liste_tmp != null){
-                                liste_tmp.setId(dcs.getId());
+                            /*
+                            for (String x :
+                                    listeIdentifiantsUser_hashmap.keySet()) {
+                                Toast.makeText(List_Activity.this, "cle : "+x+" - valeur : "+listeIdentifiantsUser_hashmap.get(x), Toast.LENGTH_SHORT).show();
 
-                                addListUI(liste_tmp);
+                            }*/
+                            if (liste_tmp != null
+                                /* &&
+                                    listeIdentifiantsUser_hashmap.get(liste_tmp.getId()) == mAuth.getCurrentUser().getUid()
+                                 */
+                            ){
+/*
+                                    if(liste_tmp.getOwnerId() != mAuth.getCurrentUser().getUid()){
+                                        // la liste en question est une liste partagee
+                                        // mettre un icone de partage ici pour l'indiquer
+                                    }
+
+ */
+                                    addListUI(liste_tmp);
+                                }
                             }
                         }
-                    }
                 });
 
 /*
@@ -219,6 +252,26 @@ public class List_Activity extends AppCompatActivity {
             addListUI(toutes_listes.get(i));
         }
 */
+    }
+
+    synchronized private void majListeUser(){
+        userListes.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
+                    Map<String, Object> identifiantsListe = dcs.getData();
+                    if (identifiantsListe != null){
+                        String cle = (String) identifiantsListe.get("id_liste");
+                        String valeur = (String) identifiantsListe.get("ownerId");
+                        listeIdentifiantsUser_hashmap.put(cle,valeur);
+                        //Toast.makeText(List_Activity.this, "ajouter id liste "+identifiantsListe.get("id_liste"), Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(List_Activity.this, "hashmap 1 : "+listeIdentifiantsUser_hashmap.containsKey((String) identifiantsListe.get("id_liste") + "---" + (String) identifiantsListe.get("id_liste")), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(List_Activity.this, "hashmap 2 : "+listeIdentifiantsUser_hashmap.get((String) identifiantsListe.get("id_liste")), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -246,7 +299,6 @@ public class List_Activity extends AppCompatActivity {
             majUI();
         }*/
         majUI();
-        Toast.makeText(this, "onResume List activity", Toast.LENGTH_SHORT).show();
     }
 
     @Override

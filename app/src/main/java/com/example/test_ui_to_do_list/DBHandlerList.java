@@ -98,7 +98,7 @@ public class DBHandlerList extends SQLiteOpenHelper {
         if (cursorLists.moveToFirst()) {
             do {
                 // on below line we are adding the data from cursor to our array list.
-                lists_ArrayList.add(new TDA_Liste(cursorLists.getString(1)));
+                lists_ArrayList.add(new TDA_Liste(cursorLists.getString(1),cursorLists.getString(1)));
             } while (cursorLists.moveToNext());
             // moving our cursor to next.
         }

@@ -15,7 +15,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import io.grpc.internal.JsonParser;
+import java.util.HashMap;
 
 public class ListCreationActivity extends AppCompatActivity {
 
@@ -26,7 +26,8 @@ public class ListCreationActivity extends AppCompatActivity {
 
     // example
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference listesRef = db.collection("Listes");
+    private CollectionReference listesRef = db.collection("Listes");;
+    private CollectionReference userListes = db.collection("ListesID");
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,9 +41,9 @@ public class ListCreationActivity extends AppCompatActivity {
         }
 
         dbList = new DBHandlerList(this);
-        EditText et = findViewById(R.id.listcreation_et_name);
+        EditText et = findViewById(R.id.itemcreation_et_name);
         name_NewList = et.getText().toString();
-        btn_CreateNewList = findViewById(R.id.signup_btn_create);
+        btn_CreateNewList = findViewById(R.id.itemadd_btn_create);
 
         btn_CreateNewList.setOnClickListener(v -> {
             createNewList();
@@ -56,7 +57,7 @@ public class ListCreationActivity extends AppCompatActivity {
     }
 
     private void createNewList(){
-        EditText tmp = findViewById(R.id.listcreation_et_name);
+        EditText tmp = findViewById(R.id.itemcreation_et_name);
         name_NewList = tmp.getText().toString();
         if (name_NewList.isEmpty()) {
             Toast.makeText(this, "Nom de liste vide", Toast.LENGTH_SHORT).show();
@@ -66,12 +67,23 @@ public class ListCreationActivity extends AppCompatActivity {
         // ajout sql
         dbList.addNewList(name_NewList, false, "");
 
-        // ajout firebase
+        // ajout liste firebase
         DocumentReference refAdded;
+        String id_liste;
         refAdded = listesRef.document();
-        TDA_Liste new_liste = new TDA_Liste(name_NewList);
-        new_liste.setId(refAdded.getId());
+        id_liste = refAdded.getId();
+        // creation de l'objet liste
+        TDA_Liste new_liste = new TDA_Liste(name_NewList, mAuth.getCurrentUser().getUid());
+        new_liste.setId(id_liste);
+        // ajout a la base de donnees
         refAdded.set(new_liste);
+        // ajout id liste a la base de donnes
+        refAdded = userListes.document();
+        HashMap<String, String> identifiantsListe = new HashMap<>();
+        identifiantsListe.put("nom_liste",name_NewList);
+        identifiantsListe.put("id_liste",id_liste);
+        identifiantsListe.put("ownerId",mAuth.getCurrentUser().getUid());
+        refAdded.set(identifiantsListe);
 
 
         //listesRef.add(new TDA_Liste(name_NewList));

@@ -1,9 +1,10 @@
 package com.example.test_ui_to_do_list;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class TDA_Item {
+public class TDA_Item implements Serializable {
     private static int counter = 0;
     private String it_Name;
     private Date it_ObjectifDate;

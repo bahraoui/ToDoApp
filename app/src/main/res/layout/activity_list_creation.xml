@@ -57,7 +57,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/listcreation_et_name"
+            android:id="@+id/itemcreation_et_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
@@ -86,7 +86,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listcreation_et_name" />
+            app:layout_constraintTop_toBottomOf="@+id/itemcreation_et_name" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -198,7 +198,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/signup_btn_create"
+            android:id="@+id/itemadd_btn_create"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"

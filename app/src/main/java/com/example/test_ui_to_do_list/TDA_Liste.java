@@ -2,10 +2,11 @@ package com.example.test_ui_to_do_list;
 
 import android.graphics.drawable.Drawable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class TDA_Liste {
+public class TDA_Liste implements Serializable {
     private static int counter = 0;
     private ArrayList<TDA_Item> li_List;
     private String li_desc;
@@ -13,6 +14,7 @@ public class TDA_Liste {
     private String li_Name;
     private Drawable li_drawable;
     private String id;
+    private String ownerId;
 
 
     public void addItem(TDA_Item item){
@@ -26,11 +28,12 @@ public class TDA_Liste {
         //this.id = counter++;
     }
 
-    public TDA_Liste(String listName){
+    public TDA_Liste(String listName, String _ownerId){
         this.li_List = new ArrayList<TDA_Item>();
         this.li_Name = listName;
         this.li_List.add(new TDA_Item("item_test"+listName, Calendar.getInstance().getTime()));
         this.li_List.add(new TDA_Item("item_test2"+listName, Calendar.getInstance().getTime()));
+        this.ownerId = _ownerId;
         //this.id = counter++;
     }
 
@@ -81,5 +84,13 @@ public class TDA_Liste {
 
     public void setLi_drawable(Drawable li_drawable) {
         this.li_drawable = li_drawable;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 }

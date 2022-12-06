@@ -46,6 +46,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".FacebookAuth" />
 
         <activity android:name=".List_Activity"
             android:parentActivityName=".MainActivity"
@@ -56,11 +57,11 @@
             android:exported="true"
             android:parentActivityName=".List_Activity"
             />
-
-        <activity android:name=".FacebookAuth" />
-
         <activity
             android:name=".SignUp"
+            android:exported="true" />
+        <activity
+            android:name=".ItemCreationActivity"
             android:exported="true" />
 
     </application>
