@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 public class InListActivity extends AppCompatActivity {
@@ -132,11 +134,13 @@ public class InListActivity extends AppCompatActivity {
         ImageView crayon = view.findViewById(R.id.item_img_modify);
         crayon.setOnClickListener(view3 -> {
             if(txt.isEnabled()){
-                crayon.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            } else {
+                modify_item_name(txt.getText().toString(),tda_item.getId());
                 crayon.setImageDrawable(getResources().getDrawable(R.drawable.ic_crayon_modify));
+                txt.setEnabled(false);
+            } else {
+                crayon.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                txt.setEnabled(true);
             }
-            txt.setEnabled(!txt.isEnabled());
         });
 /*
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -148,6 +152,19 @@ public class InListActivity extends AppCompatActivity {
         ViewGroup main = findViewById(R.id.items_linearlayout_insertPoint);
         //main.addView(view, layoutParams);
         main.addView(view);
+    }
+
+    private void modify_item_name(String new_item_name, int id){
+        tda_liste = (TDA_Liste) getIntent().getSerializableExtra("tda_liste");
+        for (TDA_Item it :
+                tda_liste.getLi_List()) {
+            if(it.getId() == id){
+                it.setIt_Name(new_item_name);
+                break;
+            }
+        }
+        listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
+        majUI();
     }
 
     private void setTitle(TDA_Liste liste){
