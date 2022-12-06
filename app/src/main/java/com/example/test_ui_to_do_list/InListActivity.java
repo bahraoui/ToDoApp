@@ -17,19 +17,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class InListActivity extends AppCompatActivity {
     private TextView tv_TitleList;
     private TextView tv_AddButton;
     private ImageView tv_ReturnButton;
     private TDA_Liste tda_liste;
+    private final AtomicBoolean isFirstLaunch = new AtomicBoolean(true);
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference listesRef = db.collection("Listes");
     private CollectionReference userListes = db.collection("ListesID");
@@ -98,7 +107,7 @@ public class InListActivity extends AppCompatActivity {
                                     listeIdentifiantsUser_hashmap.get(liste_tmp.getId()) == mAuth.getCurrentUser().getUid()
                                  */
                             ){
-                                Toast.makeText(InListActivity.this, "OUIIIIIIIIIIIIIII", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(InListActivity.this, "OUIIIIIIIIIIIIIII", Toast.LENGTH_SHORT).show();
 
                                 for (TDA_Item item : liste_tmp.getLi_List()) {
                                     addItemUI(item);
@@ -115,6 +124,42 @@ public class InListActivity extends AppCompatActivity {
 */
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventListener<QuerySnapshot> eventListenerUpdateItems = new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null || value.getMetadata().isFromCache()){
+                    return;
+                }
+
+                for (DocumentChange dc : value.getDocumentChanges()) {
+                    DocumentSnapshot dcs = dc.getDocument();
+
+                    switch (dc.getType()){
+                        case ADDED:
+                            Toast.makeText(InListActivity.this, "added", Toast.LENGTH_SHORT).show();
+                            if (isFirstLaunch.get()){
+                                majUI();
+                            }
+                            break;
+                        case REMOVED:
+                            Toast.makeText(InListActivity.this, "removed", Toast.LENGTH_SHORT).show();
+                            majUI();
+                            break;
+                        case MODIFIED:
+                            Toast.makeText(InListActivity.this, "modified", Toast.LENGTH_SHORT).show();
+                            majUI();
+                            break;
+                    }
+                }
+            }
+        };
+        isFirstLaunch.set(false);
+        listesRef.addSnapshotListener(eventListenerUpdateItems);
+    }
+
     synchronized private void addItemUI(TDA_Item tda_item){
         LayoutInflater li = getLayoutInflater();
         View view = li.inflate(R.layout.my_view_element, null);
@@ -123,13 +168,26 @@ public class InListActivity extends AppCompatActivity {
         txt.setEnabled(false);
         txt.setText(tda_item.getIt_Name());
 
+        TextView item_date = view.findViewById(R.id.item_date);
+        item_date.setText("");
+        SimpleDateFormat geek = new SimpleDateFormat("dd / MM");
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            DateTimeFormatter dateFormatter
+                    = DateTimeFormatter.ofPattern("d MMM u", Locale.ENGLISH);
+        }
+        item_date.setText(geek.format(tda_item.getIt_ObjectifDate()));
+
         CheckBox it_check = view.findViewById(R.id.item_checkBox);
         it_check.setChecked(tda_item.isFinished());
         it_check.setOnClickListener(view1 -> {
             boolean checked = ((CheckBox) view1).isChecked();
             // Check which checkbox was clicked
+            tda_liste = (TDA_Liste) getIntent().getSerializableExtra("tda_liste");
             tda_item.setFinished(checked);
+            listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
         });
+
+
 
         ImageView crayon = view.findViewById(R.id.item_img_modify);
         crayon.setOnClickListener(view3 -> {
@@ -164,7 +222,7 @@ public class InListActivity extends AppCompatActivity {
             }
         }
         listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
-        majUI();
+        //majUI();
     }
 
     private void setTitle(TDA_Liste liste){

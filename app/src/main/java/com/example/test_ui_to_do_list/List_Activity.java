@@ -120,12 +120,6 @@ public class List_Activity extends AppCompatActivity {
 
         //majUI();
         majListeUser();
-        majListeUser();
-        majListeUser();
-        majListeUser();
-        majListeUser();
-        majListeUser();
-        majListeUser();
         /*
         addListUI(new TDA_Liste("nomTEST"));
         addListUI(new TDA_Liste("nomTEST2"));
