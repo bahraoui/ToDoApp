@@ -71,7 +71,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:drawableEnd="@drawable/ic_baseline_mode_24"
+                android:drawableEnd="@drawable/ic_crayon_modify"
                 android:text="TextView" />
         </LinearLayout>
 
@@ -85,6 +85,7 @@
             tools:layout_editor_absoluteX="72dp">
 
             <LinearLayout
+                android:id="@+id/items_linearlayout_insertPoint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"/>
