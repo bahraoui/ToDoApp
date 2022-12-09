@@ -37,6 +37,17 @@ public class TDA_Liste implements Serializable {
         //this.id = counter++;
     }
 
+    public float progressFinish(){
+        int nb_items_finis = 0;
+        for (TDA_Item item :
+                li_List) {
+                if (item.isFinished()) {
+                    nb_items_finis++;
+                }
+            }
+        return (nb_items_finis*100)/li_List.size();
+    }
+
     // getters and setters :
     public ArrayList<TDA_Item> getLi_List() {
         return li_List;

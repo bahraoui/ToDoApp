@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser != null) {
 //            currentUser.reauthenticate(currentUser.get);
             startActivity(new Intent(this, activity_list.class));
+            Toast.makeText(this, "deja co",Toast.LENGTH_SHORT).show();
             finish();
         }
 

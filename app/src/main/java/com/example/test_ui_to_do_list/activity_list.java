@@ -2,6 +2,7 @@ package com.example.test_ui_to_do_list;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -33,6 +37,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class activity_list extends AppCompatActivity {
@@ -64,7 +71,9 @@ public class activity_list extends AppCompatActivity {
         fragmentSettingsBtn = findViewById(R.id.fragmentSettingsBtn);
         popup = new Dialog(this);
 
-        showPopUp();
+        if(isFirstLaunch.get()){
+            showPopUp();
+        }
 
         fragmentListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,7 +159,7 @@ public class activity_list extends AppCompatActivity {
 
                     switch (dc.getType()){
                         case ADDED:
-                            Toast.makeText(activity_list.this, "added", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(activity_list.this, "added", Toast.LENGTH_SHORT).show();
                             if (isFirstLaunch.get()){
                                 majUI();
                             }
@@ -170,8 +179,8 @@ public class activity_list extends AppCompatActivity {
             }
         };
         isFirstLaunch.set(false);
-        listesRef.addSnapshotListener(activity_list.this, eventListenerUpdateListe);
         userListes.addSnapshotListener(activity_list.this, eventListenerUpdateListe);
+        listesRef.addSnapshotListener(activity_list.this, eventListenerUpdateListe);
             /*
         } else {
             Toast.makeText(this, "not first launch", Toast.LENGTH_SHORT).show();
@@ -180,7 +189,7 @@ public class activity_list extends AppCompatActivity {
 */
     }
 
-    synchronized private void addListUI(TDA_Liste tda_liste){
+    private void addListUI(TDA_Liste tda_liste, ViewGroup main){
         LayoutInflater li = getLayoutInflater();
         View view = li.inflate(R.layout.my_view_list, null);
 
@@ -196,20 +205,30 @@ public class activity_list extends AppCompatActivity {
             return true;
         });
 
+        TextView progress = view.findViewById(R.id.myView_element_1_progress);
+        float progress_pourcentage = tda_liste.progressFinish();
+        if (progress_pourcentage > 80f){
+            progress.setTextColor(Color.rgb(46,184,42)); // vert
+        } else if (progress_pourcentage > 30f){
+            progress.setTextColor(Color.rgb(251,190,80)); // orange
+        } else {
+            progress.setTextColor(Color.rgb(244,76,51)); // rouge
+        }
+        progress.setText(Integer.toString(Math.round(progress_pourcentage))+"%");
+
+
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(50, 50, 50, 0);
 
-        ViewGroup main = findViewById(R.id.list_constLayout_insertPoint);
         main.addView(view, layoutParams);
         nbViews++;
     }
 
-    synchronized private void majUI(){
+    private void majUI(){
         //ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
-        ViewGroup main = findViewById(R.id.list_constLayout_insertPoint);
+        ViewGroup main = this.findViewById(R.id.list_constLayout_insertPoint);
         main.removeAllViews();
-
         listesRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -234,17 +253,11 @@ public class activity_list extends AppCompatActivity {
                                     }
 
  */
-                                    addListUI(liste_tmp);
+                                    addListUI(liste_tmp, main);
                                 }
                             }
                         }
                 });
-
-/*
-        for (int i = nbViews; i < toutes_listes.size(); i++){
-            addListUI(toutes_listes.get(i));
-        }
-*/
     }
 
     synchronized private void majListeUser(){
