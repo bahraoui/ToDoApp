@@ -1,5 +1,6 @@
 package com.example.test_ui_to_do_list;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,6 +39,8 @@ public class activity_in_list extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference listesRef = db.collection("Listes");
     private CollectionReference userListes = db.collection("ListesID");
+
+    Dialog popup;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -187,14 +190,8 @@ public class activity_in_list extends AppCompatActivity {
 
         ImageView crayon = view.findViewById(R.id.item_img_modify);
         crayon.setOnClickListener(view3 -> {
-            if(txt.isEnabled()){
-                modify_item_name(txt.getText().toString(),tda_item.getId());
-                crayon.setImageDrawable(getResources().getDrawable(R.drawable.ic_crayon_modify));
-                txt.setEnabled(false);
-            } else {
-                crayon.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-                txt.setEnabled(true);
-            }
+            popup = new Dialog(this);
+            showPopUp();
         });
 /*
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -223,5 +220,18 @@ public class activity_in_list extends AppCompatActivity {
 
     private void setTitle(TDA_Liste liste){
         tv_TitleList.setText(liste.getLi_Name());
+    }
+
+    public void showPopUp() {
+        TextView close;
+        popup.setContentView(R.layout.popup_item);
+        close = (TextView) popup.findViewById(R.id.closeWindows);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popup.dismiss();
+            }
+        });
+        popup.show();
     }
 }
