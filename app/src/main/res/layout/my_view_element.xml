@@ -62,6 +62,15 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
             app:srcCompat="@drawable/ic_crayon_modify" />
+
+
+        <ImageView
+            android:id="@+id/item_date_modify"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            app:srcCompat="@drawable/ic_date_modify" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
