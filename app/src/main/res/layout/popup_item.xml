@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/closeWindows"
+            android:id="@+id/popup_item_closeWindows"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
@@ -46,7 +46,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/element_modification_tv_subtitle"
+            android:id="@+id/popup_element_modification_tv_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="28dp"
@@ -60,7 +60,7 @@
             app:layout_constraintTop_toBottomOf="@+id/popup_item_title" />
 
         <EditText
-            android:id="@+id/item_modification_et_name"
+            android:id="@+id/popup_item_modification_et_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -77,10 +77,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/element_modification_tv_subtitle" />
+            app:layout_constraintTop_toBottomOf="@+id/popup_element_modification_tv_subtitle" />
 
         <TextView
-            android:id="@+id/element_modification_tv_subtitle2"
+            android:id="@+id/popup_item_element_modification_tv_subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
@@ -91,7 +91,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_modification_et_name" />
+            app:layout_constraintTop_toBottomOf="@+id/popup_item_modification_et_name" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -104,10 +104,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/element_modification_tv_subtitle2">
+            app:layout_constraintTop_toBottomOf="@+id/popup_item_element_modification_tv_subtitle2">
 
             <CalendarView
-                android:id="@+id/simpleCalendarView"
+                android:id="@+id/popup_item_simpleCalendarView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +118,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/item_modification_btn_create"
+            android:id="@+id/pop_item_modification_btn_create"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
