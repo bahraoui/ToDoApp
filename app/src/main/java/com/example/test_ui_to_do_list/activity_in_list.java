@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,6 +31,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -42,7 +46,10 @@ public class activity_in_list extends AppCompatActivity {
     private CollectionReference listesRef = db.collection("Listes");
     private CollectionReference userListes = db.collection("ListesID");
 
+    // dialog
     Dialog popup;
+    private TDA_Item itemSelectModif;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -156,6 +163,13 @@ public class activity_in_list extends AppCompatActivity {
         ImageView crayon = view.findViewById(R.id.item_img_modify);
         crayon.setOnClickListener(view3 -> {
             popup = new Dialog(this);
+            for (TDA_Item it :
+                    tda_liste.getLi_List()) {
+                if(it.getId() == tda_item.getId()){
+                    itemSelectModif = it;
+                    break;
+                }
+            }
             showPopUp();
         });
 /*
@@ -228,13 +242,38 @@ public class activity_in_list extends AppCompatActivity {
 
     public void showPopUp() {
         TextView close;
+        EditText nameItem;
+        CalendarView calendarView;
+        Button validationModifItem;
         popup.setContentView(R.layout.popup_item);
         popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        close = (TextView) popup.findViewById(R.id.closeWindows);
+        close = (TextView) popup.findViewById(R.id.popup_item_closeWindows);
+        nameItem = (EditText) popup.findViewById(R.id.popup_item_modification_et_name);
+        calendarView = (CalendarView) popup.findViewById(R.id.popup_item_simpleCalendarView);
+        validationModifItem = (Button) findViewById(R.id.pop_item_modification_btn_create);
+
+        nameItem.setText(itemSelectModif.getIt_Name());
+        calendarView.setDate(itemSelectModif.getIt_ObjectifDate().getTime());
+
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popup.dismiss();
+            }
+        });
+        validationModifItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText nameItem;
+                CalendarView calendarView;
+                nameItem = (EditText) popup.findViewById(R.id.popup_item_modification_et_name);
+                calendarView = (CalendarView) popup.findViewById(R.id.popup_item_simpleCalendarView);
+                if(!nameItem.equals(itemSelectModif.getIt_Name())
+                        || calendarView.getDate() != itemSelectModif.getIt_ObjectifDate().getTime()){
+                    itemSelectModif.setIt_Name(nameItem.getText().toString());
+                    itemSelectModif.setIt_ObjectifDate(new Date(calendarView.getDate()));
+                    listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
+                }
             }
         });
         popup.show();
