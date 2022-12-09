@@ -51,7 +51,7 @@ public class activity_list extends AppCompatActivity {
     private int nbViews;
 
     ImageButton fragmentListBtn, fragmentAccountBtn, fragmentSettingsBtn;
-    Dialog popup;
+    private Dialog popup;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference listesRef = db.collection("Listes");

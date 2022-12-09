@@ -47,7 +47,7 @@ public class activity_in_list extends AppCompatActivity {
     private CollectionReference userListes = db.collection("ListesID");
 
     // dialog
-    Dialog popup;
+    private Dialog popup_item;
     private TDA_Item itemSelectModif;
 
 
@@ -77,6 +77,7 @@ public class activity_in_list extends AppCompatActivity {
         tv_ReturnButton.setOnClickListener(view -> {
             finish();
         });
+        popup_item = new Dialog(this);
         majUI();
     }
 
@@ -162,7 +163,7 @@ public class activity_in_list extends AppCompatActivity {
 
         ImageView crayon = view.findViewById(R.id.item_img_modify);
         crayon.setOnClickListener(view3 -> {
-            popup = new Dialog(this);
+            popup_item = new Dialog(this);
             for (TDA_Item it :
                     tda_liste.getLi_List()) {
                 if(it.getId() == tda_item.getId()){
@@ -245,12 +246,12 @@ public class activity_in_list extends AppCompatActivity {
         EditText nameItem;
         CalendarView calendarView;
         Button validationModifItem;
-        popup.setContentView(R.layout.popup_item);
-        popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        close = (TextView) popup.findViewById(R.id.popup_item_closeWindows);
-        nameItem = (EditText) popup.findViewById(R.id.popup_item_modification_et_name);
-        calendarView = (CalendarView) popup.findViewById(R.id.popup_item_simpleCalendarView);
-        validationModifItem = (Button) findViewById(R.id.pop_item_modification_btn_create);
+        popup_item.setContentView(R.layout.popup_item);
+        popup_item.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        close = (TextView) popup_item.findViewById(R.id.popup_item_closeWindows);
+        nameItem = (EditText) popup_item.findViewById(R.id.popup_item_modification_et_name);
+        calendarView = (CalendarView) popup_item.findViewById(R.id.popup_item_simpleCalendarView);
+        validationModifItem = (Button) popup_item.findViewById(R.id.pop_item_modification_btn_create);
 
         nameItem.setText(itemSelectModif.getIt_Name());
         calendarView.setDate(itemSelectModif.getIt_ObjectifDate().getTime());
@@ -258,24 +259,25 @@ public class activity_in_list extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popup.dismiss();
+                popup_item.dismiss();
             }
         });
         validationModifItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText nameItem;
-                CalendarView calendarView;
-                nameItem = (EditText) popup.findViewById(R.id.popup_item_modification_et_name);
-                calendarView = (CalendarView) popup.findViewById(R.id.popup_item_simpleCalendarView);
-                if(!nameItem.equals(itemSelectModif.getIt_Name())
-                        || calendarView.getDate() != itemSelectModif.getIt_ObjectifDate().getTime()){
-                    itemSelectModif.setIt_Name(nameItem.getText().toString());
-                    itemSelectModif.setIt_ObjectifDate(new Date(calendarView.getDate()));
+                EditText nameItem2;
+                CalendarView calendarView2;
+                nameItem2 = (EditText) popup_item.findViewById(R.id.popup_item_modification_et_name);
+                calendarView2 = (CalendarView) popup_item.findViewById(R.id.popup_item_simpleCalendarView);
+                if(!nameItem2.equals(itemSelectModif.getIt_Name())
+                        || calendarView2.getDate() != itemSelectModif.getIt_ObjectifDate().getTime()){
+                    itemSelectModif.setIt_Name(nameItem2.getText().toString());
+                    itemSelectModif.setIt_ObjectifDate(new Date(calendarView2.getDate()));
                     listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
+                    popup_item.dismiss();
                 }
             }
         });
-        popup.show();
+        popup_item.show();
     }
 }
