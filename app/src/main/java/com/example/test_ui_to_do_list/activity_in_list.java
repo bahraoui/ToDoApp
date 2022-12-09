@@ -2,6 +2,8 @@ package com.example.test_ui_to_do_list;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -227,6 +229,7 @@ public class activity_in_list extends AppCompatActivity {
     public void showPopUp() {
         TextView close;
         popup.setContentView(R.layout.popup_item);
+        popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         close = (TextView) popup.findViewById(R.id.closeWindows);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
