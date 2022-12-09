@@ -78,50 +78,7 @@ public class activity_in_list extends AppCompatActivity {
         startActivity(i);
     }
 
-    synchronized private void majUI(){
-        //ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
-        ViewGroup main = findViewById(R.id.items_linearlayout_insertPoint);
-        main.removeAllViews();
 
-        listesRef.get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        tda_liste = (TDA_Liste) getIntent().getSerializableExtra("tda_liste");
-                        for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
-                            TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
-                            String debug = "li nom : "+liste_tmp.getLi_Name()+
-                                    "\n"+"li  vrai nom "+tda_liste.getLi_Name()+
-                                    "\n"+"li  id "+liste_tmp.getId()+
-                                    "\n"+"li vrai       id "+tda_liste.getId();
-                            //Toast.makeText(InListActivity.this, debug, Toast.LENGTH_SHORT).show();
-                            /*
-                            for (String x :
-                                    listeIdentifiantsUser_hashmap.keySet()) {
-                                Toast.makeText(List_Activity.this, "cle : "+x+" - valeur : "+listeIdentifiantsUser_hashmap.get(x), Toast.LENGTH_SHORT).show();
-
-                            }*/
-                            if (liste_tmp != null && liste_tmp.getId()!=null && liste_tmp.getId().equals(tda_liste.getId())
-                                /* &&
-                                    listeIdentifiantsUser_hashmap.get(liste_tmp.getId()) == mAuth.getCurrentUser().getUid()
-                                 */
-                            ){
-                                //Toast.makeText(InListActivity.this, "OUIIIIIIIIIIIIIII", Toast.LENGTH_SHORT).show();
-
-                                for (TDA_Item item : liste_tmp.getLi_List()) {
-                                    addItemUI(item);
-                                }
-                            }
-                        }
-                    }
-                });
-
-/*
-        for (int i = nbViews; i < toutes_listes.size(); i++){
-            addListUI(toutes_listes.get(i));
-        }
-*/
-    }
 
     @Override
     protected void onStart() {
@@ -138,7 +95,7 @@ public class activity_in_list extends AppCompatActivity {
 
                     switch (dc.getType()){
                         case ADDED:
-                            Toast.makeText(activity_in_list.this, "added", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(activity_in_list.this, "added", Toast.LENGTH_SHORT).show();
                             if (isFirstLaunch.get()){
                                 majUI();
                             }
@@ -180,9 +137,15 @@ public class activity_in_list extends AppCompatActivity {
         it_check.setChecked(tda_item.isFinished());
         it_check.setOnClickListener(view1 -> {
             boolean checked = ((CheckBox) view1).isChecked();
-            // Check which checkbox was clicked
-            tda_liste = (TDA_Liste) getIntent().getSerializableExtra("tda_liste");
-            tda_item.setFinished(checked);
+            /// Check which checkbox was clicked
+            for (TDA_Item it :
+                    tda_liste.getLi_List()) {
+                if(it.getId() == tda_item.getId()){
+                    it.setFinished(checked);
+                    break;
+                }
+            }
+            Toast.makeText(this, "test check :"+checked, Toast.LENGTH_SHORT).show();
             listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
         });
 
@@ -203,6 +166,45 @@ public class activity_in_list extends AppCompatActivity {
         ViewGroup main = findViewById(R.id.items_linearlayout_insertPoint);
         //main.addView(view, layoutParams);
         main.addView(view);
+    }
+
+    synchronized private void majUI(){
+        //ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
+        ViewGroup main = findViewById(R.id.items_linearlayout_insertPoint);
+        main.removeAllViewsInLayout();
+
+        listesRef.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        tda_liste = (TDA_Liste) getIntent().getSerializableExtra("tda_liste");
+                        for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
+                            TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
+                            String debug = "li nom : "+liste_tmp.getLi_Name()+
+                                    "\n"+"li  vrai nom "+tda_liste.getLi_Name()+
+                                    "\n"+"li  id "+liste_tmp.getId()+
+                                    "\n"+"li vrai       id "+tda_liste.getId();
+                            //Toast.makeText(InListActivity.this, debug, Toast.LENGTH_SHORT).show();
+                            /*
+                            for (String x :
+                                    listeIdentifiantsUser_hashmap.keySet()) {
+                                Toast.makeText(List_Activity.this, "cle : "+x+" - valeur : "+listeIdentifiantsUser_hashmap.get(x), Toast.LENGTH_SHORT).show();
+
+                            }*/
+                            if (liste_tmp != null && liste_tmp.getId()!=null && liste_tmp.getId().equals(tda_liste.getId())
+                                /* &&
+                                    listeIdentifiantsUser_hashmap.get(liste_tmp.getId()) == mAuth.getCurrentUser().getUid()
+                                 */
+                            ){
+                                //Toast.makeText(InListActivity.this, "OUIIIIIIIIIIIIIII", Toast.LENGTH_SHORT).show();
+
+                                for (TDA_Item item : liste_tmp.getLi_List()) {
+                                    addItemUI(item);
+                                }
+                            }
+                        }
+                    }
+                });
     }
 
     private void modify_item_name(String new_item_name, int id){
