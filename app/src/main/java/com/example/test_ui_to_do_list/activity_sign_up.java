@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignUp extends AppCompatActivity {
+public class activity_sign_up extends AppCompatActivity {
     public FirebaseAuth mAuth;
     EditText nom, prenom, email, password;
     Button inscription;
@@ -44,9 +44,9 @@ public class SignUp extends AppCompatActivity {
                 String txt_password = password.getText().toString();
 
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
-                    Toast.makeText(SignUp.this, "Email ou mot de passe vide !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity_sign_up.this, "Email ou mot de passe vide !", Toast.LENGTH_SHORT).show();
                 } else if (txt_password.length() < 6) {
-                    Toast.makeText(SignUp.this, "Mot de passe trop court!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity_sign_up.this, "Mot de passe trop court!", Toast.LENGTH_SHORT).show();
                 } else {
                     registerUser(txt_email, txt_password);
                 }
@@ -55,17 +55,17 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void registerUser(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(activity_sign_up.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     //error message
-                    Toast.makeText(SignUp.this, "Enregistrement Reussi!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignUp.this, MainActivity.class));
+                    Toast.makeText(activity_sign_up.this, "Enregistrement Reussi!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(activity_sign_up.this, MainActivity.class));
                     finish();
                 } else {
                     //success
-                    Toast.makeText(SignUp.this, "Echec d'Authentification!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity_sign_up.this, "Echec d'Authentification!!!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

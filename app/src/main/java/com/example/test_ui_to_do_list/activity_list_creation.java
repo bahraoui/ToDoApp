@@ -17,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class ListCreationActivity extends AppCompatActivity {
+public class activity_list_creation extends AppCompatActivity {
 
     private String name_NewList;
     private Button btn_CreateNewList;

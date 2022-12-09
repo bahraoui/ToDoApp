@@ -2,15 +2,9 @@ package com.example.test_ui_to_do_list;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -26,7 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemCreationActivity extends AppCompatActivity {
+public class activity_element_creation extends AppCompatActivity {
     private EditText name_NewItem;
     private Button btn_CreateNewItem;
     private CalendarView calendarView;

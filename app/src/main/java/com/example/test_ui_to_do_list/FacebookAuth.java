@@ -82,7 +82,7 @@ public class FacebookAuth extends MainActivity{
                     }
 
                     private void updateUI(FirebaseUser user) {
-                        Intent intent = new Intent(FacebookAuth.this, List_Activity.class);
+                        Intent intent = new Intent(FacebookAuth.this, activity_list.class);
                         startActivity(intent);
                     }
                 });

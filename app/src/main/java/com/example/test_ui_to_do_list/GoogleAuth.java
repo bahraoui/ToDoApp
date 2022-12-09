@@ -1,12 +1,10 @@
 package com.example.test_ui_to_do_list;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -88,7 +86,7 @@ public class GoogleAuth extends MainActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        Intent intent = new Intent(GoogleAuth.this, List_Activity.class);
+        Intent intent = new Intent(GoogleAuth.this, activity_list.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

@@ -3,7 +3,6 @@ package com.example.test_ui_to_do_list;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class List_Activity extends AppCompatActivity {
+public class activity_list extends AppCompatActivity {
 
     private TextView btn_AddNewList;
     private FirebaseAuth mAuth;
@@ -113,7 +112,7 @@ public class List_Activity extends AppCompatActivity {
         dbList = new DBHandlerList(this);
         btn_AddNewList = findViewById(R.id.list_tv_add);
         btn_AddNewList.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ListCreationActivity.class);
+            Intent intent = new Intent(this, activity_list_creation.class);
             startActivity(intent);
         });
 
@@ -151,18 +150,18 @@ public class List_Activity extends AppCompatActivity {
 
                     switch (dc.getType()){
                         case ADDED:
-                            Toast.makeText(List_Activity.this, "added", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity_list.this, "added", Toast.LENGTH_SHORT).show();
                             if (isFirstLaunch.get()){
                                 majUI();
                             }
                             break;
                         case REMOVED:
-                            Toast.makeText(List_Activity.this, "removed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity_list.this, "removed", Toast.LENGTH_SHORT).show();
                             majListeUser();
                             majUI();
                             break;
                         case MODIFIED:
-                            Toast.makeText(List_Activity.this, "modified", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity_list.this, "modified", Toast.LENGTH_SHORT).show();
                             majListeUser();
                             majUI();
                             break;
@@ -171,8 +170,8 @@ public class List_Activity extends AppCompatActivity {
             }
         };
         isFirstLaunch.set(false);
-        listesRef.addSnapshotListener(this, eventListenerUpdateListe);
-        userListes.addSnapshotListener(this, eventListenerUpdateListe);
+        listesRef.addSnapshotListener(activity_list.this, eventListenerUpdateListe);
+        userListes.addSnapshotListener(activity_list.this, eventListenerUpdateListe);
             /*
         } else {
             Toast.makeText(this, "not first launch", Toast.LENGTH_SHORT).show();
@@ -191,7 +190,7 @@ public class List_Activity extends AppCompatActivity {
 
         txt.setOnLongClickListener(v -> {
             Toast.makeText(this, "SUCCES", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, InListActivity.class);
+            Intent intent = new Intent(this, activity_in_list.class);
             intent.putExtra("tda_liste",tda_liste);
             startActivity(intent);
             return true;

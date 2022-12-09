@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,15 +24,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class InListActivity extends AppCompatActivity {
+public class activity_in_list extends AppCompatActivity {
     private TextView tv_TitleList;
     private TextView tv_AddButton;
     private ImageView tv_ReturnButton;
@@ -73,7 +69,7 @@ public class InListActivity extends AppCompatActivity {
     }
 
     private void addItemActivityLaunch(){
-        Intent i = new Intent(this, ItemCreationActivity.class);
+        Intent i = new Intent(this, activity_element_creation.class);
         TDA_Liste liste = (TDA_Liste) getIntent().getSerializableExtra("tda_liste");
         i.putExtra("tda_liste_ajout_item",liste);
         startActivity(i);
@@ -139,17 +135,17 @@ public class InListActivity extends AppCompatActivity {
 
                     switch (dc.getType()){
                         case ADDED:
-                            Toast.makeText(InListActivity.this, "added", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity_in_list.this, "added", Toast.LENGTH_SHORT).show();
                             if (isFirstLaunch.get()){
                                 majUI();
                             }
                             break;
                         case REMOVED:
-                            Toast.makeText(InListActivity.this, "removed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity_in_list.this, "removed", Toast.LENGTH_SHORT).show();
                             majUI();
                             break;
                         case MODIFIED:
-                            Toast.makeText(InListActivity.this, "modified", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity_in_list.this, "modified", Toast.LENGTH_SHORT).show();
                             majUI();
                             break;
                     }
