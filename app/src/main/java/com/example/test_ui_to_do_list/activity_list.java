@@ -321,7 +321,7 @@ public class activity_list extends AppCompatActivity {
         close = (TextView) popup.findViewById(R.id.closeWindows);
         close.setOnClickListener(view -> popup.dismiss());
 
-        final Hashtable<String,String> toDoToday = new Hashtable<String,String>();
+        HashMap<String,ArrayList<String>> toDoToday = new HashMap<>();
 
         listesRef.get()
             .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -333,9 +333,18 @@ public class activity_list extends AppCompatActivity {
                               ArrayList<TDA_Item>  liList= liste_tmp.getLi_List();
                               for (TDA_Item item : liList) {
                                     Date itemDate = item.getIt_ObjectifDate();
-                                    if(itemDate.compareTo(Calendar.getInstance().getTime()) < 0) {
+                                    if(itemDate.compareTo(Calendar.getInstance().getTime()) <= 0) {
                                         if(item.isFinished() == false) {
-                                            toDoToday.put(liste_tmp.getLi_Name(),item.getIt_Name());
+                                            ArrayList<String> list;
+                                            if(toDoToday.containsKey(liste_tmp.getId())) {
+                                                list = toDoToday.get(liste_tmp.getId());
+                                            }
+                                            else{
+                                                list = new ArrayList<String>();
+                                                list.add(liste_tmp.getLi_Name());
+                                            }
+                                            list.add(item.getIt_Name());
+                                            toDoToday.put(liste_tmp.getId(),list);
                                         }
                                     }
                               }
@@ -345,20 +354,20 @@ public class activity_list extends AppCompatActivity {
             }).continueWith(new Continuation<QuerySnapshot, Object>() {
                     @Override
                     public Object then(@NonNull Task<QuerySnapshot> task) throws Exception {
-                        Enumeration<String> e = toDoToday.keys();
+
                         String text = "";
                         String previousList = "";
-                        while (e.hasMoreElements()) {
-                            String key = e.nextElement();
-                            /*if(!previousList.equals(key)) {
-                                previousList = key;
-                                text += key + " - " + toDoToday.get(key) + "\n";
+                        for (Map.Entry<String, ArrayList<String>> set : toDoToday.entrySet()) {
+
+                            ArrayList<String> respondList = set.getValue();
+
+                            text += respondList.get(0) + " :\n";
+                            for (int counter = 1; counter < respondList.size(); counter++) {
+                                text += "- " + respondList.get(counter) +"\n";
                             }
-                            else {
-                                text += "    - " + toDoToday.get(key) + "\n";
-                            }*/
-                            text += key + " - " + toDoToday.get(key) + "\n";
+                            text += "\n";
                         }
+
                         TextView popupText =  popup.findViewById(R.id.popup_text);
                         popupText.setText(text);
                         return null;

@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:text="6 déc : Courses"
             android:textColor="@color/white"
-            android:textSize="17sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
