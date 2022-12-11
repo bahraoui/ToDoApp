@@ -256,11 +256,6 @@ public class activity_list extends AppCompatActivity {
                                 }
                             }
                         }
-                }).continueWith(new Continuation<QuerySnapshot, Object>() {
-                    @Override
-                    public Object then(@NonNull Task<QuerySnapshot> task) throws Exception {
-                        return null;
-                    }
                 });
     }
 
@@ -276,6 +271,12 @@ public class activity_list extends AppCompatActivity {
                         listeIdentifiantsUser_hashmap.put(cle,valeur);
                     }
                 }
+            }
+        }).continueWith(new Continuation<QuerySnapshot, Object>() {
+            @Override
+            public Object then(@NonNull Task<QuerySnapshot> task) throws Exception {
+                //majUI();
+                return null;
             }
         });
     }

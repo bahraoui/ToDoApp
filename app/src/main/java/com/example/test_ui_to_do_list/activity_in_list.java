@@ -199,7 +199,7 @@ public class activity_in_list extends AppCompatActivity {
             /// Check which checkbox was clicked
             for (TDA_Item it :
                     tda_liste.getLi_List()) {
-                if(it.getId() == tda_item.getId()){
+                if(it == tda_item){
                     it.setFinished(checked);
                     break;
                 }
@@ -214,7 +214,7 @@ public class activity_in_list extends AppCompatActivity {
             popup_item = new Dialog(this);
             for (TDA_Item it :
                     tda_liste.getLi_List()) {
-                if(it.getId() == tda_item.getId()){
+                if(it == tda_item){
                     itemSelectModif = it;
                     break;
                 }
