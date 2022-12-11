@@ -66,13 +66,13 @@
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_autres" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+            <ImageView
+                android:id="@+id/modify_liste_inlist"
+                android:layout_marginTop="24dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:drawableEnd="@drawable/ic_crayon_modify"
-                android:text="TextView" />
+                app:srcCompat="@drawable/ic_crayon_modify"/>
         </LinearLayout>
 
         <ScrollView

@@ -2,7 +2,6 @@ package com.example.test_ui_to_do_list;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -35,7 +34,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -45,6 +43,7 @@ public class activity_in_list extends AppCompatActivity {
     private TextView tv_AddButton;
     private ImageView tv_ReturnButton;
     private ConstraintLayout button_share;
+    private ImageView modifyList;
     private TDA_Liste tda_liste;
     private final AtomicBoolean isFirstLaunch = new AtomicBoolean(true);
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -54,6 +53,8 @@ public class activity_in_list extends AppCompatActivity {
     // dialog
     private Dialog popup_item;
     private TDA_Item itemSelectModif;
+    private Dialog popup_liste;
+    private ImageView imgSelectionne;
 
 
     @Override
@@ -64,6 +65,7 @@ public class activity_in_list extends AppCompatActivity {
         tv_AddButton = findViewById(R.id.list_tv_add);
         tv_ReturnButton = findViewById(R.id.imageView_return);
         button_share = findViewById(R.id.constraintLayout_inlist_share);
+        modifyList = findViewById(R.id.modify_liste_inlist);
         /*
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -85,9 +87,16 @@ public class activity_in_list extends AppCompatActivity {
         });
 
         button_share.setOnClickListener(view -> {
+            // uniquement pour tester
+            // a changer a l'avenir
             deleteList();
         });
+
+        modifyList.setOnClickListener(v -> {
+            showPopup_liste();
+        });
         popup_item = new Dialog(this);
+        popup_liste = new Dialog(this);
         majUI();
     }
 
@@ -122,7 +131,6 @@ public class activity_in_list extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         // Show the Alert Dialog box
         alertDialog.show();
-
     }
 
     private void addItemActivityLaunch(){
@@ -199,7 +207,6 @@ public class activity_in_list extends AppCompatActivity {
                     break;
                 }
             }
-            Toast.makeText(this, "test check :"+checked, Toast.LENGTH_SHORT).show();
             listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
         });
 
@@ -215,7 +222,7 @@ public class activity_in_list extends AppCompatActivity {
                     break;
                 }
             }
-            showPopUp();
+            showPopUp_item();
         });
 /*
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -234,6 +241,7 @@ public class activity_in_list extends AppCompatActivity {
         ViewGroup main = findViewById(R.id.items_linearlayout_insertPoint);
         main.removeAllViewsInLayout();
 
+        // pourcentage liste
         TextView bottomPourcentage = findViewById(R.id.inlist_tv_progress);
         int nbItemsDone = tda_liste.nbItemsDone();
         int nbItems = tda_liste.getLi_List().size();
@@ -248,6 +256,12 @@ public class activity_in_list extends AppCompatActivity {
         String displayBottomText = nbItemsDone+"/"+nbItems+" - "+pourcentageDone+"%";
         bottomPourcentage.setText(displayBottomText);
 
+        // icone liste
+        tv_TitleList.setCompoundDrawablesWithIntrinsicBounds(tda_liste.getLi_drawable(),0,0,0);
+        // titre liste
+        tv_TitleList.setText(tda_liste.getLi_Name());
+
+        // ajout item ui
         listesRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -263,7 +277,8 @@ public class activity_in_list extends AppCompatActivity {
                             /*
                             for (String x :
                                     listeIdentifiantsUser_hashmap.keySet()) {
-                                Toast.makeText(List_Activity.this, "cle : "+x+" - valeur : "+listeIdentifiantsUser_hashmap.get(x), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(List_Activity.this, "cle : "+x+" - valeur : "
+                                +listeIdentifiantsUser_hashmap.get(x), Toast.LENGTH_SHORT).show();
 
                             }*/
                             if (liste_tmp != null && liste_tmp.getId()!=null && liste_tmp.getId().equals(tda_liste.getId())
@@ -286,7 +301,7 @@ public class activity_in_list extends AppCompatActivity {
         tv_TitleList.setText(liste.getLi_Name());
     }
 
-    public void showPopUp() {
+    public void showPopUp_item() {
         TextView close;
         final EditText[] nameItem = new EditText[1];
         final CalendarView[] calendarView = new CalendarView[1];
@@ -325,5 +340,86 @@ public class activity_in_list extends AppCompatActivity {
             }
         });
         popup_item.show();
+    }
+
+    public void showPopup_liste(){
+        ArrayList<ImageView> logos;
+        logos = new ArrayList<>();
+        popup_liste.setContentView(R.layout.popup_liste);
+        popup_liste.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        imgSelectionne = popup_liste.findViewById(R.id.logo5);
+        imgSelectionne.setTag(R.drawable.ic_car);
+        logos.add(popup_liste.findViewById(R.id.logo1));
+        logos.add(popup_liste.findViewById(R.id.logo2));
+        logos.add(popup_liste.findViewById(R.id.logo3));
+        logos.add(popup_liste.findViewById(R.id.logo4));
+        logos.add(popup_liste.findViewById(R.id.logo5));
+        logos.add(popup_liste.findViewById(R.id.logo6));
+        logos.add(popup_liste.findViewById(R.id.logo7));
+        logos.add(popup_liste.findViewById(R.id.logo8));
+        logos.add(popup_liste.findViewById(R.id.logo9));
+        logos.add(popup_liste.findViewById(R.id.logo10));
+        selectIconDrawable(popup_liste.findViewById(R.id.logo1));
+
+        // bouton valider
+        Button validateModification = popup_liste.findViewById(R.id.pop_liste_modification_btn_create);
+        validateModification.setOnClickListener(v -> {
+            EditText et = (EditText) popup_liste.findViewById(R.id.popup_liste_modification_et_name);
+            String newNameList = et.getText().toString();
+            if(newNameList.isEmpty()) return;
+            if (tda_liste.getLi_Name().equals(newNameList) && tda_liste.getLi_drawable() == (int) imgSelectionne.getTag()){
+                Toast.makeText(this,"aucun changement",Toast.LENGTH_SHORT).show();
+                // afficher qu'il n'ya eu aucun changement
+            } else {
+                Toast.makeText(this,"changement",Toast.LENGTH_SHORT).show();
+                tda_liste.setLi_Name(newNameList);
+                tda_liste.setLi_drawable((int)imgSelectionne.getTag());
+                listesRef.document(tda_liste.getId()).update("li_Name",tda_liste.getLi_Name(),
+                        "li_drawable",tda_liste.getLi_drawable());
+                popup_liste.dismiss();
+                //majUI();
+            }
+        });
+        popup_liste.show();
+    }
+
+    public void selectIconDrawable(View v){
+        // ancien selectionnee:
+        imgSelectionne.setBackground(null);
+        // nouveau selectionnee:
+        imgSelectionne = (ImageView) v;
+        switch (imgSelectionne.getId()){
+            case R.id.logo1:
+                imgSelectionne.setTag(R.drawable.ic_autres);
+                break;
+            case R.id.logo2:
+                imgSelectionne.setTag(R.drawable.ic_flatware);
+                break;
+            case R.id.logo3:
+                imgSelectionne.setTag(R.drawable.ic_baseline_fastfood_24);
+                break;
+            case R.id.logo4:
+                imgSelectionne.setTag(R.drawable.ic_baseline_shopping_cart);
+                break;
+            case R.id.logo5:
+                imgSelectionne.setTag(R.drawable.background_selection_icon);
+                break;
+            case R.id.logo6:
+                imgSelectionne.setTag(R.drawable.ic_flight);
+                break;
+            case R.id.logo7:
+                imgSelectionne.setTag(R.drawable.ic_baseline_account_balance_24);
+                break;
+            case R.id.logo8:
+                imgSelectionne.setTag(R.drawable.ic_home);
+                break;
+            case R.id.logo9:
+                imgSelectionne.setTag(R.drawable.ic_baseline_local_phone_24);
+                break;
+            case R.id.logo10:
+                imgSelectionne.setTag(R.drawable.ic_baseline_medication_24);
+                break;
+        }
+        imgSelectionne.setBackground(getResources().getDrawable(R.drawable.background_selection_icon));
     }
 }

@@ -29,7 +29,7 @@ public class activity_list_creation extends AppCompatActivity {
 
     // example
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference listesRef = db.collection("Listes");;
+    private CollectionReference listesRef = db.collection("Listes");
     private CollectionReference userListes = db.collection("ListesID");
     private ArrayList<ImageView> logos;
     private ImageView imgSelectionne;
@@ -151,7 +151,6 @@ public class activity_list_creation extends AppCompatActivity {
                 break;
         }
         imgSelectionne.setBackground(getResources().getDrawable(R.drawable.background_selection_icon));
-
     }
 
     @Override

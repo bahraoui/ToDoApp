@@ -250,6 +250,7 @@ public class activity_list extends AppCompatActivity {
         //ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
         ViewGroup main = this.findViewById(R.id.list_constLayout_insertPoint);
         main.removeAllViews();
+        Toast.makeText(activity_list.this, mAuth.getUid(), Toast.LENGTH_SHORT).show();
         listesRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -272,7 +273,6 @@ public class activity_list extends AppCompatActivity {
                                         // la liste en question est une liste partagee
                                         // mettre un icone de partage ici pour l'indiquer
                                     }
-
  */
                                     addListUI(liste_tmp, main);
                                 }
@@ -331,7 +331,7 @@ public class activity_list extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Toast.makeText(this, "onPause list activity", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "onPause list activity", Toast.LENGTH_SHORT).show();
     }
 
     public void showPopUp() {
