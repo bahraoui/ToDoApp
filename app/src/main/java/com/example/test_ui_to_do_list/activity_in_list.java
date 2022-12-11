@@ -361,13 +361,57 @@ public class activity_in_list extends AppCompatActivity {
         logos.add(popup_liste.findViewById(R.id.logo10));
         selectIconDrawable(popup_liste.findViewById(R.id.logo1));
 
+        // default value
+        EditText et2 = (EditText) popup_liste.findViewById(R.id.popup_liste_modification_et_name);
+        et2.setText(tda_liste.getLi_Name());
+        for(ImageView iv : logos){
+            switch (iv.getId()){
+                case R.id.logo1:
+                    iv.setTag(R.drawable.ic_autres);
+                    break;
+                case R.id.logo2:
+                    iv.setTag(R.drawable.ic_flatware);
+                    break;
+                case R.id.logo3:
+                    iv.setTag(R.drawable.ic_baseline_fastfood_24);
+                    break;
+                case R.id.logo4:
+                    iv.setTag(R.drawable.ic_baseline_shopping_cart);
+                    break;
+                case R.id.logo5:
+                    iv.setTag(R.drawable.ic_car);
+                    break;
+                case R.id.logo6:
+                    iv.setTag(R.drawable.ic_flight);
+                    break;
+                case R.id.logo7:
+                    iv.setTag(R.drawable.ic_baseline_account_balance_24);
+                    break;
+                case R.id.logo8:
+                    iv.setTag(R.drawable.ic_home);
+                    break;
+                case R.id.logo9:
+                    iv.setTag(R.drawable.ic_baseline_local_phone_24);
+                    break;
+                case R.id.logo10:
+                    iv.setTag(R.drawable.ic_baseline_medication_24);
+                    break;
+            }
+        }
+        for(ImageView iv : logos){
+            if((int)iv.getTag()==tda_liste.getLi_drawable()){
+                selectIconDrawable(iv);
+            }
+        }
+
         // bouton valider
         Button validateModification = popup_liste.findViewById(R.id.pop_liste_modification_btn_create);
         validateModification.setOnClickListener(v -> {
             EditText et = (EditText) popup_liste.findViewById(R.id.popup_liste_modification_et_name);
             String newNameList = et.getText().toString();
             if(newNameList.isEmpty()) return;
-            if (tda_liste.getLi_Name().equals(newNameList) && tda_liste.getLi_drawable() == (int) imgSelectionne.getTag()){
+            if (tda_liste.getLi_Name().equals(newNameList)
+                    && tda_liste.getLi_drawable() == (int) imgSelectionne.getTag()){
                 Toast.makeText(this,"aucun changement",Toast.LENGTH_SHORT).show();
                 // afficher qu'il n'ya eu aucun changement
             } else {
@@ -380,6 +424,14 @@ public class activity_in_list extends AppCompatActivity {
                 //majUI();
             }
         });
+
+        // bouton fermer
+        Button closeWindow = popup_liste.findViewById(R.id.popup_liste_closeWindows);
+        closeWindow.setOnClickListener(v -> {
+            popup_liste.dismiss();
+        });
+
+        // afficher popup modification liste
         popup_liste.show();
     }
 
@@ -402,7 +454,7 @@ public class activity_in_list extends AppCompatActivity {
                 imgSelectionne.setTag(R.drawable.ic_baseline_shopping_cart);
                 break;
             case R.id.logo5:
-                imgSelectionne.setTag(R.drawable.background_selection_icon);
+                imgSelectionne.setTag(R.drawable.ic_car);
                 break;
             case R.id.logo6:
                 imgSelectionne.setTag(R.drawable.ic_flight);

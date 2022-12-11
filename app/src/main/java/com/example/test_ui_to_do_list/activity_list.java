@@ -250,30 +250,24 @@ public class activity_list extends AppCompatActivity {
         //ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
         ViewGroup main = this.findViewById(R.id.list_constLayout_insertPoint);
         main.removeAllViews();
-        Toast.makeText(activity_list.this, mAuth.getUid(), Toast.LENGTH_SHORT).show();
         listesRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
                             TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
-                            /*
-                            for (String x :
+                            /* for (String x :
                                     listeIdentifiantsUser_hashmap.keySet()) {
                                 Toast.makeText(List_Activity.this, "cle : "+x+" - valeur : "+listeIdentifiantsUser_hashmap.get(x), Toast.LENGTH_SHORT).show();
 
                             }*/
                             if (liste_tmp != null
-                                /* &&
-                                    listeIdentifiantsUser_hashmap.get(liste_tmp.getId()) == mAuth.getCurrentUser().getUid()
-                                 */
+                                // && listeIdentifiantsUser_hashmap.get(liste_tmp.getId()) == mAuth.getCurrentUser().getUid()
                             ){
-/*
-                                    if(liste_tmp.getOwnerId() != mAuth.getCurrentUser().getUid()){
+/*                                    if(liste_tmp.getOwnerId() != mAuth.getCurrentUser().getUid()){
                                         // la liste en question est une liste partagee
                                         // mettre un icone de partage ici pour l'indiquer
-                                    }
- */
+                                    }*/
                                     addListUI(liste_tmp, main);
                                 }
                             }

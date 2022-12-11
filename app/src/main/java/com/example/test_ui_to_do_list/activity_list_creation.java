@@ -132,7 +132,7 @@ public class activity_list_creation extends AppCompatActivity {
                 imgSelectionne.setTag(R.drawable.ic_baseline_shopping_cart);
                 break;
             case R.id.logo5:
-                imgSelectionne.setTag(R.drawable.background_selection_icon);
+                imgSelectionne.setTag(R.drawable.ic_car);
                 break;
             case R.id.logo6:
                 imgSelectionne.setTag(R.drawable.ic_flight);
