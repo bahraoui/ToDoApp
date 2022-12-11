@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -22,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
@@ -250,6 +252,11 @@ public class activity_list extends AppCompatActivity {
                                 }
                             }
                         }
+                }).continueWith(new Continuation<QuerySnapshot, Object>() {
+                    @Override
+                    public Object then(@NonNull Task<QuerySnapshot> task) throws Exception {
+                        return null;
+                    }
                 });
     }
 

@@ -74,7 +74,8 @@ public class activity_element_creation extends AppCompatActivity {
                     break;
             }
         };*/
-        if(selectedDate.compareTo((Calendar.getInstance().getTime())) <= 0){
+        /*
+        if(selectedDate.compareTo((Calendar.getInstance().getTime())) < 0){
             Toast.makeText(this, "Veuillez sélectionner une date posterieure à celle actuelle", Toast.LENGTH_SHORT).show();
             /*
             AlertDialog.Builder ab = new AlertDialog.Builder(this);
@@ -88,7 +89,7 @@ public class activity_element_creation extends AppCompatActivity {
                 return;
             }*/
             return;
-        }
+        }*/
 
         name_NewItem = findViewById(R.id.itemcreation_et_name);
         String name_item = name_NewItem.getText().toString();
