@@ -229,11 +229,11 @@ public class activity_list extends AppCompatActivity {
         TextView progress = view.findViewById(R.id.myView_element_1_progress);
         float progress_pourcentage = tda_liste.progressFinish();
         if (progress_pourcentage > 80f){
-            progress.setTextColor(Color.rgb(46,184,42)); // vert
+            progress.setTextColor(Color.rgb(0,255,0)); // vert
         } else if (progress_pourcentage > 30f){
-            progress.setTextColor(Color.rgb(251,190,80)); // orange
+            progress.setTextColor(Color.rgb(255,215,0)); // orange
         } else {
-            progress.setTextColor(Color.rgb(244,76,51)); // rouge
+            progress.setTextColor(Color.rgb(255,51,51)); // rouge
         }
         progress.setText(Integer.toString(Math.round(progress_pourcentage))+"%");
 

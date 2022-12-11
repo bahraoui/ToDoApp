@@ -31,8 +31,6 @@ public class TDA_Liste implements Serializable {
     public TDA_Liste(String listName, String _ownerId){
         this.li_List = new ArrayList<TDA_Item>();
         this.li_Name = listName;
-        this.li_List.add(new TDA_Item("item_test"+listName, Calendar.getInstance().getTime()));
-        this.li_List.add(new TDA_Item("item_test2"+listName, Calendar.getInstance().getTime()));
         this.ownerId = _ownerId;
         //this.id = counter++;
     }
@@ -45,7 +43,10 @@ public class TDA_Liste implements Serializable {
                     nb_items_finis++;
                 }
             }
-        return (nb_items_finis*100)/li_List.size();
+        if(li_List.size() == 0)
+            return 0;
+        else
+            return (nb_items_finis*100)/li_List.size();
     }
 
     public int nbItemsDone(){

@@ -27,7 +27,7 @@
         <EditText
             android:id="@+id/item_et_title"
             android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:autoSizeMaxTextSize="30sp"
             android:autoSizeMinTextSize="12sp"

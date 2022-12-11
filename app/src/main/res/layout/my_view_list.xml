@@ -13,6 +13,7 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="3dp"
         android:autoSizeMaxTextSize="30sp"
         android:autoSizeMinTextSize="12sp"
         android:autoSizeStepGranularity="2sp"
@@ -20,11 +21,13 @@
         android:drawableStart="@drawable/ic_baseline_shopping_cart"
         android:drawablePadding="16dp"
         android:text="empty"
+        android:textAlignment="viewStart"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
 
     <TextView
         android:id="@+id/myView_element_1_progress"
