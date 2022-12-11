@@ -1,6 +1,8 @@
 package com.example.test_ui_to_do_list;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -40,6 +43,7 @@ public class activity_in_list extends AppCompatActivity {
     private TextView tv_TitleList;
     private TextView tv_AddButton;
     private ImageView tv_ReturnButton;
+    private ConstraintLayout button_share;
     private TDA_Liste tda_liste;
     private final AtomicBoolean isFirstLaunch = new AtomicBoolean(true);
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -58,6 +62,7 @@ public class activity_in_list extends AppCompatActivity {
         tv_TitleList = findViewById(R.id.inlist_tv_title);
         tv_AddButton = findViewById(R.id.list_tv_add);
         tv_ReturnButton = findViewById(R.id.imageView_return);
+        button_share = findViewById(R.id.constraintLayout_inlist_share);
         /*
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -77,8 +82,46 @@ public class activity_in_list extends AppCompatActivity {
         tv_ReturnButton.setOnClickListener(view -> {
             finish();
         });
+
+        button_share.setOnClickListener(view -> {
+            deleteList();
+        });
         popup_item = new Dialog(this);
         majUI();
+    }
+
+    private void deleteList() {
+        // Create the object of AlertDialog Builder class
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity_in_list.this);
+
+        // Set the message show for the Alert time
+        builder.setMessage("Voulez-vous vraiment supprimer la liste "+tda_liste.getLi_Name()+" ?");
+
+        // Set Alert Title
+        builder.setTitle("Suppression liste "+tda_liste.getLi_Name());
+
+        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+        builder.setCancelable(true);
+
+        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            // When the user click yes button then app will close
+            // SUPPRESSION LISTE ICI
+            listesRef.document(tda_liste.getId()).delete();
+            finish();
+        });
+
+        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setNegativeButton("No", (dialog, which) -> {
+            // If user click no then dialog box is canceled.
+            dialog.cancel();
+        });
+
+        // Create the Alert dialog
+        AlertDialog alertDialog = builder.create();
+        // Show the Alert Dialog box
+        alertDialog.show();
+
     }
 
     private void addItemActivityLaunch(){
@@ -200,9 +243,9 @@ public class activity_in_list extends AppCompatActivity {
                         for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
                             TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
                             String debug = "li nom : "+liste_tmp.getLi_Name()+
-                                    "\n"+"li  vrai nom "+tda_liste.getLi_Name()+
-                                    "\n"+"li  id "+liste_tmp.getId()+
-                                    "\n"+"li vrai       id "+tda_liste.getId();
+                                    "\nli vrai nom "+tda_liste.getLi_Name()+
+                                    "\nli id "+liste_tmp.getId()+
+                                    "\nli vrai id "+tda_liste.getId();
                             //Toast.makeText(InListActivity.this, debug, Toast.LENGTH_SHORT).show();
                             /*
                             for (String x :
@@ -224,19 +267,6 @@ public class activity_in_list extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    private void modify_item_name(String new_item_name, int id){
-        tda_liste = (TDA_Liste) getIntent().getSerializableExtra("tda_liste");
-        for (TDA_Item it :
-                tda_liste.getLi_List()) {
-            if(it.getId() == id){
-                it.setIt_Name(new_item_name);
-                break;
-            }
-        }
-        listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
-        //majUI();
     }
 
     private void setTitle(TDA_Liste liste){

@@ -117,7 +117,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayoutButton1"
+        android:id="@+id/constraintLayout_inlist_share"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_marginStart="16dp"

@@ -108,6 +108,7 @@
 
                 <ImageView
                     android:id="@+id/logo1"
+                    android:onClick="selectIconDrawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
@@ -116,6 +117,7 @@
 
                 <ImageView
                     android:id="@+id/logo2"
+                    android:onClick="selectIconDrawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
@@ -124,6 +126,7 @@
 
                 <ImageView
                     android:id="@+id/logo3"
+                    android:onClick="selectIconDrawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
@@ -131,7 +134,9 @@
                     app:srcCompat="@drawable/ic_baseline_fastfood_24" />
 
                 <ImageView
+
                     android:id="@+id/logo4"
+                    android:onClick="selectIconDrawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
@@ -140,6 +145,7 @@
 
                 <ImageView
                     android:id="@+id/logo5"
+                    android:onClick="selectIconDrawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
@@ -156,6 +162,7 @@
 
                 <ImageView
                     android:id="@+id/logo6"
+                    android:onClick="selectIconDrawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
@@ -164,6 +171,7 @@
 
                 <ImageView
                     android:id="@+id/logo7"
+                    android:onClick="selectIconDrawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
@@ -172,6 +180,7 @@
 
                 <ImageView
                     android:id="@+id/logo8"
+                    android:onClick="selectIconDrawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
@@ -180,6 +189,7 @@
 
                 <ImageView
                     android:id="@+id/logo9"
+                    android:onClick="selectIconDrawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
@@ -188,6 +198,7 @@
 
                 <ImageView
                     android:id="@+id/logo10"
+                    android:onClick="selectIconDrawable"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"

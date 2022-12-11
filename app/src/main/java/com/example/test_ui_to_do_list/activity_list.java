@@ -2,6 +2,7 @@ package com.example.test_ui_to_do_list;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -162,6 +163,7 @@ public class activity_list extends AppCompatActivity {
                     switch (dc.getType()){
                         case ADDED:
                             //Toast.makeText(activity_list.this, "added", Toast.LENGTH_SHORT).show();
+                            majListeUser();
                             if (isFirstLaunch.get()){
                                 majUI();
                             }
@@ -169,12 +171,16 @@ public class activity_list extends AppCompatActivity {
                         case REMOVED:
                             Toast.makeText(activity_list.this, "removed", Toast.LENGTH_SHORT).show();
                             majListeUser();
-                            majUI();
+                            if (isFirstLaunch.get()){
+                                majUI();
+                            }
                             break;
                         case MODIFIED:
                             Toast.makeText(activity_list.this, "modified", Toast.LENGTH_SHORT).show();
                             majListeUser();
-                            majUI();
+                            if (isFirstLaunch.get()){
+                                majUI();
+                            }
                             break;
                     }
                 }
@@ -197,7 +203,13 @@ public class activity_list extends AppCompatActivity {
 
         TextView txt = view.findViewById(R.id.myView_element_1_name);
         txt.setText(tda_liste.getLi_Name());
-        txt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_autres,0,0,0);
+        try {
+            getResources().getDrawable(tda_liste.getLi_drawable());
+            txt.setCompoundDrawablesWithIntrinsicBounds(tda_liste.getLi_drawable(),0,0,0);
+        } catch (Resources.NotFoundException e){
+            txt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_autres,0,0,0);
+            //Toast.makeText(activity_list.this,"erreur - drawable icon list", Toast.LENGTH_SHORT).show();
+        }
 
         ConstraintLayout cl = view.findViewById(R.id.myView_list_constraintLayout);
         cl.setOnClickListener(v -> {
