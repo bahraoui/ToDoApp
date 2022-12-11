@@ -87,9 +87,8 @@ public class activity_in_list extends AppCompatActivity {
         });
 
         button_share.setOnClickListener(view -> {
-            // uniquement pour tester
-            // a changer a l'avenir
-            deleteList();
+            // donner adresse mail pour
+            // partager
         });
 
         modifyList.setOnClickListener(v -> {
@@ -100,7 +99,7 @@ public class activity_in_list extends AppCompatActivity {
         majUI();
     }
 
-    private void deleteList() {
+    private void deleteList(Dialog _dialog) {
         // Create the object of AlertDialog Builder class
         AlertDialog.Builder builder = new AlertDialog.Builder(activity_in_list.this);
 
@@ -118,6 +117,7 @@ public class activity_in_list extends AppCompatActivity {
             // When the user click yes button then app will close
             // SUPPRESSION LISTE ICI
             listesRef.document(tda_liste.getId()).delete();
+            _dialog.dismiss();
             finish();
         });
 
@@ -155,19 +155,16 @@ public class activity_in_list extends AppCompatActivity {
 
                     switch (dc.getType()){
                         case ADDED:
-                            //Toast.makeText(activity_in_list.this, "added", Toast.LENGTH_SHORT).show();
                             if (isFirstLaunch.get()){
                                 majUI();
                             }
                             break;
                         case REMOVED:
-                            Toast.makeText(activity_in_list.this, "removed", Toast.LENGTH_SHORT).show();
                             if (isFirstLaunch.get()){
                                 majUI();
                             }
                             break;
                         case MODIFIED:
-                            Toast.makeText(activity_in_list.this, "modified", Toast.LENGTH_SHORT).show();
                             majUI();
                             break;
                     }
@@ -273,7 +270,6 @@ public class activity_in_list extends AppCompatActivity {
                                     "\nli vrai nom "+tda_liste.getLi_Name()+
                                     "\nli id "+liste_tmp.getId()+
                                     "\nli vrai id "+tda_liste.getId();
-                            //Toast.makeText(InListActivity.this, debug, Toast.LENGTH_SHORT).show();
                             /*
                             for (String x :
                                     listeIdentifiantsUser_hashmap.keySet()) {
@@ -286,8 +282,6 @@ public class activity_in_list extends AppCompatActivity {
                                     listeIdentifiantsUser_hashmap.get(liste_tmp.getId()) == mAuth.getCurrentUser().getUid()
                                  */
                             ){
-                                //Toast.makeText(InListActivity.this, "OUIIIIIIIIIIIIIII", Toast.LENGTH_SHORT).show();
-
                                 for (TDA_Item item : liste_tmp.getLi_List()) {
                                     addItemUI(item);
                                 }
@@ -334,7 +328,7 @@ public class activity_in_list extends AppCompatActivity {
                     listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
                     popup_item.dismiss();
                 } else {
-                    String afficher = "";
+                    String afficher = "aucun changement";
                     Toast.makeText(activity_in_list.this,afficher,Toast.LENGTH_SHORT).show();
                 }
             }
@@ -415,7 +409,6 @@ public class activity_in_list extends AppCompatActivity {
                 Toast.makeText(this,"aucun changement",Toast.LENGTH_SHORT).show();
                 // afficher qu'il n'ya eu aucun changement
             } else {
-                Toast.makeText(this,"changement",Toast.LENGTH_SHORT).show();
                 tda_liste.setLi_Name(newNameList);
                 tda_liste.setLi_drawable((int)imgSelectionne.getTag());
                 listesRef.document(tda_liste.getId()).update("li_Name",tda_liste.getLi_Name(),
@@ -423,6 +416,12 @@ public class activity_in_list extends AppCompatActivity {
                 popup_liste.dismiss();
                 //majUI();
             }
+        });
+
+        // bouton supprimer
+        Button btn_delete = popup_liste.findViewById(R.id.pop_liste_modification_btn_delete);
+        btn_delete.setOnClickListener(v -> {
+            deleteList(popup_liste);
         });
 
         // bouton fermer

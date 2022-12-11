@@ -162,21 +162,8 @@ public class activity_list extends AppCompatActivity {
 
                     switch (dc.getType()){
                         case ADDED:
-                            //Toast.makeText(activity_list.this, "added", Toast.LENGTH_SHORT).show();
-                            majListeUser();
-                            if (isFirstLaunch.get()){
-                                majUI();
-                            }
-                            break;
                         case REMOVED:
-                            Toast.makeText(activity_list.this, "removed", Toast.LENGTH_SHORT).show();
-                            majListeUser();
-                            if (isFirstLaunch.get()){
-                                majUI();
-                            }
-                            break;
                         case MODIFIED:
-                            Toast.makeText(activity_list.this, "modified", Toast.LENGTH_SHORT).show();
                             majListeUser();
                             if (isFirstLaunch.get()){
                                 majUI();
@@ -208,7 +195,6 @@ public class activity_list extends AppCompatActivity {
             txt.setCompoundDrawablesWithIntrinsicBounds(tda_liste.getLi_drawable(),0,0,0);
         } catch (Resources.NotFoundException e){
             txt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_autres,0,0,0);
-            //Toast.makeText(activity_list.this,"erreur - drawable icon list", Toast.LENGTH_SHORT).show();
         }
 
         ConstraintLayout cl = view.findViewById(R.id.myView_list_constraintLayout);
@@ -217,14 +203,6 @@ public class activity_list extends AppCompatActivity {
             intent.putExtra("tda_liste",tda_liste);
             startActivity(intent);
         });
-        /*
-        txt.setOnLongClickListener(v -> {
-            Intent intent = new Intent(this, activity_in_list.class);
-            intent.putExtra("tda_liste",tda_liste);
-            startActivity(intent);
-            return true;
-        });
-         */
 
         TextView progress = view.findViewById(R.id.myView_element_1_progress);
         float progress_pourcentage = tda_liste.progressFinish();
@@ -285,10 +263,6 @@ public class activity_list extends AppCompatActivity {
                         String cle = (String) identifiantsListe.get("id_liste");
                         String valeur = (String) identifiantsListe.get("ownerId");
                         listeIdentifiantsUser_hashmap.put(cle,valeur);
-                        //Toast.makeText(List_Activity.this, "ajouter id liste "+identifiantsListe.get("id_liste"), Toast.LENGTH_SHORT).show();
-
-                        //Toast.makeText(List_Activity.this, "hashmap 1 : "+listeIdentifiantsUser_hashmap.containsKey((String) identifiantsListe.get("id_liste") + "---" + (String) identifiantsListe.get("id_liste")), Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(List_Activity.this, "hashmap 2 : "+listeIdentifiantsUser_hashmap.get((String) identifiantsListe.get("id_liste")), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -325,7 +299,6 @@ public class activity_list extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        //Toast.makeText(this, "onPause list activity", Toast.LENGTH_SHORT).show();
     }
 
     public void showPopUp() {
@@ -333,12 +306,7 @@ public class activity_list extends AppCompatActivity {
         popup.setContentView(R.layout.popup);
         popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         close = (TextView) popup.findViewById(R.id.closeWindows);
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popup.dismiss();
-            }
-        });
+        close.setOnClickListener(view -> popup.dismiss());
         popup.show();
     }
 }
