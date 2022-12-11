@@ -34,6 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -130,8 +131,6 @@ public class activity_in_list extends AppCompatActivity {
         i.putExtra("tda_liste_ajout_item",liste);
         startActivity(i);
     }
-
-
 
     @Override
     protected void onStart() {
@@ -234,6 +233,20 @@ public class activity_in_list extends AppCompatActivity {
         //ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
         ViewGroup main = findViewById(R.id.items_linearlayout_insertPoint);
         main.removeAllViewsInLayout();
+
+        TextView bottomPourcentage = findViewById(R.id.inlist_tv_progress);
+        int nbItemsDone = tda_liste.nbItemsDone();
+        int nbItems = tda_liste.getLi_List().size();
+        int pourcentageDone = Math.round(tda_liste.progressFinish());
+        if (pourcentageDone > 80f){
+            bottomPourcentage.setTextColor(Color.rgb(46,184,42)); // vert
+        } else if (pourcentageDone > 30f){
+            bottomPourcentage.setTextColor(Color.rgb(251,190,80)); // orange
+        } else {
+            bottomPourcentage.setTextColor(Color.rgb(244,76,51)); // rouge
+        }
+        String displayBottomText = nbItemsDone+"/"+nbItems+" - "+pourcentageDone+"%";
+        bottomPourcentage.setText(displayBottomText);
 
         listesRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
