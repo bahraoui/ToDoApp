@@ -50,12 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //Toast.makeText(MainActivity.this, "etape 1", Toast.LENGTH_SHORT).show();
-
         if(currentUser != null) {
 //            currentUser.reauthenticate(currentUser.get);
             startActivity(new Intent(this, activity_list.class));
-            Toast.makeText(this, "deja co",Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -117,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void forcageConnexion(){
         // forcage de connexion :
-        Toast.makeText(MainActivity.this, "SUCCES", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "FORCAGE CO", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, activity_list.class);
         startActivity(intent);
         finish();
@@ -136,13 +133,11 @@ public class MainActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Toast.makeText(MainActivity.this, "SUCCES", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(MainActivity.this, activity_list.class);
                                 startActivity(intent);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(MainActivity.this, "FAIL", Toast.LENGTH_SHORT).show();
                                 Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                             }
                         }
