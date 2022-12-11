@@ -10,7 +10,7 @@ public class TDA_Item implements Serializable {
     private Date it_ObjectifDate;
     private boolean isFinished;
     private boolean isOutdated;
-    private int id;
+    private long id;
 
 
     public boolean checkTime(){
@@ -34,7 +34,7 @@ public class TDA_Item implements Serializable {
         this.isFinished = false;
         this.isOutdated = false;
         this.it_ObjectifDate = newDate;
-        this.id = counter++;
+        this.id = Calendar.getInstance().getTimeInMillis();
     }
 
 
@@ -72,11 +72,11 @@ public class TDA_Item implements Serializable {
         isOutdated = outdated;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }
