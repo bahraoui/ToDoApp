@@ -48,38 +48,43 @@
             android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="24dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/inlist_tv_title"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="24dp"
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
                 android:drawablePadding="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="RDV Banque"
+                android:text="test"
                 android:textColor="@color/white"
-                android:textSize="30sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_autres" />
 
             <ImageView
                 android:id="@+id/modify_liste_inlist"
-                android:layout_marginTop="24dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="24dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_crayon_modify"/>
+                app:srcCompat="@drawable/ic_modify" />
         </LinearLayout>
 
         <ScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toTopOf="@+id/inlist_tv_progress"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
             tools:layout_editor_absoluteX="72dp">
@@ -88,7 +93,7 @@
                 android:id="@+id/items_linearlayout_insertPoint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+                android:orientation="vertical" />
         </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout

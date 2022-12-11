@@ -5,18 +5,22 @@
     android:layout_height="55dp"
     android:layout_margin="16dp"
     android:id="@+id/myView_list_constraintLayout"
+
     android:background="@drawable/button_background_blue2">
 
     <TextView
         android:id="@+id/myView_element_1_name"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:autoSizeMaxTextSize="30sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
         android:drawableStart="@drawable/ic_baseline_shopping_cart"
         android:drawablePadding="16dp"
         android:text="empty"
         android:textColor="@color/white"
-        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -22,6 +22,7 @@
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_autres.xml" value="0.1425" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_directions_run_24.xml" value="0.1" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_fastfood_24.xml" value="0.1" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_mode_24.xml" value="0.1805" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2555" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_baseline_shopping_cart.xml" value="0.1" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/drawable/ic_check.xml" value="0.1" />
@@ -49,6 +50,7 @@
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/my_view_list.xml" value="0.4" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/popup.xml" value="0.24895833333333334" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/popup_item.xml" value="0.2" />
+        <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/popup_liste.xml" value="0.25" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/layout/popup_window.xml" value="0.25" />
         <entry key="..\:/UQAC/android_mobile/Test_UI_To_Do_List/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
