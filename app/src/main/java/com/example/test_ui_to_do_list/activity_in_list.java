@@ -112,7 +112,9 @@ public class activity_in_list extends AppCompatActivity {
                             break;
                         case REMOVED:
                             Toast.makeText(activity_in_list.this, "removed", Toast.LENGTH_SHORT).show();
-                            majUI();
+                            if (isFirstLaunch.get()){
+                                majUI();
+                            }
                             break;
                         case MODIFIED:
                             Toast.makeText(activity_in_list.this, "modified", Toast.LENGTH_SHORT).show();
@@ -243,18 +245,18 @@ public class activity_in_list extends AppCompatActivity {
 
     public void showPopUp() {
         TextView close;
-        EditText nameItem;
-        CalendarView calendarView;
+        final EditText[] nameItem = new EditText[1];
+        final CalendarView[] calendarView = new CalendarView[1];
         Button validationModifItem;
         popup_item.setContentView(R.layout.popup_item);
         popup_item.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         close = (TextView) popup_item.findViewById(R.id.popup_item_closeWindows);
-        nameItem = (EditText) popup_item.findViewById(R.id.popup_item_modification_et_name);
-        calendarView = (CalendarView) popup_item.findViewById(R.id.popup_item_simpleCalendarView);
+        nameItem[0] = (EditText) popup_item.findViewById(R.id.popup_item_modification_et_name);
+        calendarView[0] = (CalendarView) popup_item.findViewById(R.id.popup_item_simpleCalendarView);
         validationModifItem = (Button) popup_item.findViewById(R.id.pop_item_modification_btn_create);
 
-        nameItem.setText(itemSelectModif.getIt_Name());
-        calendarView.setDate(itemSelectModif.getIt_ObjectifDate().getTime());
+        nameItem[0].setText(itemSelectModif.getIt_Name());
+        calendarView[0].setDate(itemSelectModif.getIt_ObjectifDate().getTime());
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,16 +267,17 @@ public class activity_in_list extends AppCompatActivity {
         validationModifItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText nameItem2;
-                CalendarView calendarView2;
-                nameItem2 = (EditText) popup_item.findViewById(R.id.popup_item_modification_et_name);
-                calendarView2 = (CalendarView) popup_item.findViewById(R.id.popup_item_simpleCalendarView);
-                if(!nameItem2.equals(itemSelectModif.getIt_Name())
-                        || calendarView2.getDate() != itemSelectModif.getIt_ObjectifDate().getTime()){
-                    itemSelectModif.setIt_Name(nameItem2.getText().toString());
-                    itemSelectModif.setIt_ObjectifDate(new Date(calendarView2.getDate()));
+                nameItem[0] = (EditText) popup_item.findViewById(R.id.popup_item_modification_et_name);
+                calendarView[0] = (CalendarView) popup_item.findViewById(R.id.popup_item_simpleCalendarView);
+                if(!nameItem[0].getText().toString().equals(itemSelectModif.getIt_Name())
+                        || itemSelectModif.getIt_ObjectifDate().compareTo(new Date(calendarView[0].getDate())) != 0){
+                    itemSelectModif.setIt_Name(nameItem[0].getText().toString());
+                    itemSelectModif.setIt_ObjectifDate(new Date(calendarView[0].getDate()));
                     listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
                     popup_item.dismiss();
+                } else {
+                    String afficher = "";
+                    Toast.makeText(activity_in_list.this,afficher,Toast.LENGTH_SHORT).show();
                 }
             }
         });
