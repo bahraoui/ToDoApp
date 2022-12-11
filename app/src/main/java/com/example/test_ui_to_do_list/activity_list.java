@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -198,13 +199,20 @@ public class activity_list extends AppCompatActivity {
         txt.setText(tda_liste.getLi_Name());
         txt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_autres,0,0,0);
 
+        ConstraintLayout cl = view.findViewById(R.id.myView_list_constraintLayout);
+        cl.setOnClickListener(v -> {
+            Intent intent = new Intent(this, activity_in_list.class);
+            intent.putExtra("tda_liste",tda_liste);
+            startActivity(intent);
+        });
+        /*
         txt.setOnLongClickListener(v -> {
-            Toast.makeText(this, "SUCCES", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, activity_in_list.class);
             intent.putExtra("tda_liste",tda_liste);
             startActivity(intent);
             return true;
         });
+         */
 
         TextView progress = view.findViewById(R.id.myView_element_1_progress);
         float progress_pourcentage = tda_liste.progressFinish();
