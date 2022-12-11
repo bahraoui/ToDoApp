@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -194,14 +195,13 @@ public class activity_list extends AppCompatActivity {
         LayoutInflater li = getLayoutInflater();
         View view = li.inflate(R.layout.my_view_list, null);
 
+        // titre texte
         TextView txt = view.findViewById(R.id.myView_element_1_name);
         txt.setText(tda_liste.getLi_Name());
-        try {
-            getResources().getDrawable(tda_liste.getLi_drawable());
-            txt.setCompoundDrawablesWithIntrinsicBounds(tda_liste.getLi_drawable(),0,0,0);
-        } catch (Resources.NotFoundException e){
-            txt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_autres,0,0,0);
-        }
+
+        // icone
+        ImageView iv_icon = view.findViewById(R.id.myImage_element_1);
+        iv_icon.setImageDrawable(tda_liste.getLi_drawable());
 
         ConstraintLayout cl = view.findViewById(R.id.myView_list_constraintLayout);
         cl.setOnClickListener(v -> {

@@ -93,7 +93,7 @@ public class activity_list_creation extends AppCompatActivity {
         id_liste = refAdded.getId();
         // creation de l'objet liste
         TDA_Liste new_liste = new TDA_Liste(name_NewList, mAuth.getCurrentUser().getUid());
-        new_liste.setLi_drawable((Integer) imgSelectionne.getTag());
+        new_liste.setLi_drawable(imgSelectionne.getDrawable());
         new_liste.setId(id_liste);
         // ajout a la base de donnees
         refAdded.set(new_liste);

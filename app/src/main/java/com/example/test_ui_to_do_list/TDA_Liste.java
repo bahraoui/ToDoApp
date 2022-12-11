@@ -12,7 +12,7 @@ public class TDA_Liste implements Serializable {
     private String li_desc;
     private boolean li_isFinish;
     private String li_Name;
-    private int li_drawable;
+    private Drawable li_drawable;
     private String id;
     private String ownerId;
 
@@ -103,11 +103,11 @@ public class TDA_Liste implements Serializable {
         this.id = _id;
     }
 
-    public int getLi_drawable() {
+    public Drawable getLi_drawable() {
         return li_drawable;
     }
 
-    public void setLi_drawable(int li_drawable) {
+    public void setLi_drawable(Drawable li_drawable) {
         this.li_drawable = li_drawable;
     }
 

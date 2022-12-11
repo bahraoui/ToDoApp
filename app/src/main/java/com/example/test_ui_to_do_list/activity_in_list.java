@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -254,7 +255,8 @@ public class activity_in_list extends AppCompatActivity {
         bottomPourcentage.setText(displayBottomText);
 
         // icone liste
-        tv_TitleList.setCompoundDrawablesWithIntrinsicBounds(tda_liste.getLi_drawable(),0,0,0);
+        ImageView iv_icon = findViewById(R.id.inlist_iv_icon);
+        iv_icon.setImageDrawable(tda_liste.getLi_drawable());
         // titre liste
         tv_TitleList.setText(tda_liste.getLi_Name());
 
@@ -359,41 +361,7 @@ public class activity_in_list extends AppCompatActivity {
         EditText et2 = (EditText) popup_liste.findViewById(R.id.popup_liste_modification_et_name);
         et2.setText(tda_liste.getLi_Name());
         for(ImageView iv : logos){
-            switch (iv.getId()){
-                case R.id.logo1:
-                    iv.setTag(R.drawable.ic_autres);
-                    break;
-                case R.id.logo2:
-                    iv.setTag(R.drawable.ic_flatware);
-                    break;
-                case R.id.logo3:
-                    iv.setTag(R.drawable.ic_baseline_fastfood_24);
-                    break;
-                case R.id.logo4:
-                    iv.setTag(R.drawable.ic_baseline_shopping_cart);
-                    break;
-                case R.id.logo5:
-                    iv.setTag(R.drawable.ic_car);
-                    break;
-                case R.id.logo6:
-                    iv.setTag(R.drawable.ic_flight);
-                    break;
-                case R.id.logo7:
-                    iv.setTag(R.drawable.ic_baseline_account_balance_24);
-                    break;
-                case R.id.logo8:
-                    iv.setTag(R.drawable.ic_home);
-                    break;
-                case R.id.logo9:
-                    iv.setTag(R.drawable.ic_baseline_local_phone_24);
-                    break;
-                case R.id.logo10:
-                    iv.setTag(R.drawable.ic_baseline_medication_24);
-                    break;
-            }
-        }
-        for(ImageView iv : logos){
-            if((int)iv.getTag()==tda_liste.getLi_drawable()){
+            if(iv.getDrawable()==tda_liste.getLi_drawable()){
                 selectIconDrawable(iv);
             }
         }
@@ -405,12 +373,12 @@ public class activity_in_list extends AppCompatActivity {
             String newNameList = et.getText().toString();
             if(newNameList.isEmpty()) return;
             if (tda_liste.getLi_Name().equals(newNameList)
-                    && tda_liste.getLi_drawable() == (int) imgSelectionne.getTag()){
+                    && tda_liste.getLi_drawable() == imgSelectionne.getDrawable()){
                 Toast.makeText(this,"aucun changement",Toast.LENGTH_SHORT).show();
                 // afficher qu'il n'ya eu aucun changement
             } else {
                 tda_liste.setLi_Name(newNameList);
-                tda_liste.setLi_drawable((int)imgSelectionne.getTag());
+                tda_liste.setLi_drawable(imgSelectionne.getDrawable());
                 listesRef.document(tda_liste.getId()).update("li_Name",tda_liste.getLi_Name(),
                         "li_drawable",tda_liste.getLi_drawable());
                 popup_liste.dismiss();
