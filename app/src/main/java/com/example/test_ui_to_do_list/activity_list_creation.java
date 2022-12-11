@@ -71,7 +71,7 @@ public class activity_list_creation extends AppCompatActivity {
         selectIconDrawable(findViewById(R.id.logo1));
     }
 
-    public void finishActivity() {
+    public void finishActivity(View v) {
         finish();
     }
 

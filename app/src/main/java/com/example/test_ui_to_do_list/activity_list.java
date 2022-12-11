@@ -148,7 +148,7 @@ public class activity_list extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         //majUI();
-        final AtomicBoolean isFirstListener = new AtomicBoolean(true);
+        //final AtomicBoolean isFirstListener = new AtomicBoolean(true);
         //if(isFirstLaunch.get()){
         EventListener<QuerySnapshot> eventListenerUpdateListe = new EventListener<QuerySnapshot>() {
             @Override
