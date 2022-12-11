@@ -36,7 +36,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-black"
-            android:text="Création d'un élément"
+            android:text="Modifier un élément"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"

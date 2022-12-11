@@ -40,7 +40,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -309,11 +313,58 @@ public class activity_list extends AppCompatActivity {
     }
 
     public void showPopUp() {
+
         TextView close;
         popup.setContentView(R.layout.popup);
         popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         close = (TextView) popup.findViewById(R.id.closeWindows);
         close.setOnClickListener(view -> popup.dismiss());
+
+        final Hashtable<String,String> toDoToday = new Hashtable<String,String>();
+
+        listesRef.get()
+            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                      for (QueryDocumentSnapshot dcs : queryDocumentSnapshots) {
+                          TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
+                          if (liste_tmp != null) {
+                              ArrayList<TDA_Item>  liList= liste_tmp.getLi_List();
+                              for (TDA_Item item : liList) {
+                                    Date itemDate = item.getIt_ObjectifDate();
+                                    if(itemDate.compareTo(Calendar.getInstance().getTime()) < 0) {
+                                        if(item.isFinished() == false) {
+                                            toDoToday.put(liste_tmp.getLi_Name(),item.getIt_Name());
+                                        }
+                                    }
+                              }
+                          }
+                      }
+                }
+            }).continueWith(new Continuation<QuerySnapshot, Object>() {
+                    @Override
+                    public Object then(@NonNull Task<QuerySnapshot> task) throws Exception {
+                        Enumeration<String> e = toDoToday.keys();
+                        String text = "";
+                        String previousList = "";
+                        while (e.hasMoreElements()) {
+                            String key = e.nextElement();
+                            /*if(!previousList.equals(key)) {
+                                previousList = key;
+                                text += key + " - " + toDoToday.get(key) + "\n";
+                            }
+                            else {
+                                text += "    - " + toDoToday.get(key) + "\n";
+                            }*/
+                            text += key + " - " + toDoToday.get(key) + "\n";
+                        }
+                        TextView popupText =  popup.findViewById(R.id.popup_text);
+                        popupText.setText(text);
+                        return null;
+                    }
+                });
+
+
         popup.show();
     }
 }
