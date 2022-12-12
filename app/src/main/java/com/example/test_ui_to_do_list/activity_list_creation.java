@@ -1,6 +1,7 @@
 package com.example.test_ui_to_do_list;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -93,7 +94,7 @@ public class activity_list_creation extends AppCompatActivity {
         id_liste = refAdded.getId();
         // creation de l'objet liste
         TDA_Liste new_liste = new TDA_Liste(name_NewList, mAuth.getCurrentUser().getUid());
-        new_liste.setLi_drawable(TDA_Liste.drawableToBitmap(imgSelectionne.getDrawable()));
+        new_liste.setLi_drawable(BitmapFactory.decodeResource(getResources(),(int)imgSelectionne.getTag()));
         new_liste.setId(id_liste);
         // ajout a la base de donnees
         refAdded.set(new_liste);
