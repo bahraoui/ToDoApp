@@ -59,6 +59,7 @@ public class activity_list extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DBHandlerList dbList;
     private int nbViews;
+    private String textPopUp;
 
     ImageButton fragmentListBtn, fragmentAccountBtn, fragmentSettingsBtn;
     private Dialog popup;
@@ -323,59 +324,54 @@ public class activity_list extends AppCompatActivity {
         close.setOnClickListener(view -> popup.dismiss());
 
         HashMap<String,ArrayList<String>> toDoToday = new HashMap<>();
-
-        listesRef.get()
-            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                      for (QueryDocumentSnapshot dcs : queryDocumentSnapshots) {
-                          TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
-                          if (liste_tmp != null) {
-                              ArrayList<TDA_Item>  liList= liste_tmp.getLi_List();
-                              for (TDA_Item item : liList) {
-                                    Date itemDate = item.getIt_ObjectifDate();
-                                    if(itemDate.compareTo(Calendar.getInstance().getTime()) <= 0) {
-                                        if(item.isFinished() == false) {
-                                            ArrayList<String> list;
-                                            if(toDoToday.containsKey(liste_tmp.getId())) {
-                                                list = toDoToday.get(liste_tmp.getId());
-                                            }
-                                            else{
-                                                list = new ArrayList<String>();
-                                                list.add(liste_tmp.getLi_Name());
-                                            }
-                                            list.add(item.getIt_Name());
-                                            toDoToday.put(liste_tmp.getId(),list);
-                                        }
+        textPopUp = "";
+        listesRef.get().addOnSuccessListener(queryDocumentSnapshots -> {
+              for (QueryDocumentSnapshot dcs : queryDocumentSnapshots) {
+                  TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
+                  if (liste_tmp != null) {
+                      ArrayList<TDA_Item>  liList= liste_tmp.getLi_List();
+                      for (TDA_Item item : liList) {
+                            Date itemDate = item.getIt_ObjectifDate();
+                            if(itemDate.compareTo(Calendar.getInstance().getTime()) <= 0) {
+                                if(item.isFinished() == false) {
+                                    ArrayList<String> list;
+                                    if(toDoToday.containsKey(liste_tmp.getId())) {
+                                        list = toDoToday.get(liste_tmp.getId());
                                     }
-                              }
-                          }
-                      }
-                }
-            }).continueWith(new Continuation<QuerySnapshot, Object>() {
-                    @Override
-                    public Object then(@NonNull Task<QuerySnapshot> task) throws Exception {
-
-                        String text = "";
-                        String previousList = "";
-                        for (Map.Entry<String, ArrayList<String>> set : toDoToday.entrySet()) {
-
-                            ArrayList<String> respondList = set.getValue();
-
-                            text += respondList.get(0) + " :\n";
-                            for (int counter = 1; counter < respondList.size(); counter++) {
-                                text += "- " + respondList.get(counter) +"\n";
+                                    else{
+                                        list = new ArrayList<String>();
+                                        list.add(liste_tmp.getLi_Name());
+                                    }
+                                    list.add(item.getIt_Name());
+                                    toDoToday.put(liste_tmp.getId(),list);
+                                }
                             }
-                            text += "\n";
-                        }
+                      }
+                  }
+              }
+        }).continueWith(task -> {
 
-                        TextView popupText =  popup.findViewById(R.id.popup_text);
-                        popupText.setText(text);
-                        return null;
+            //textPopUp += toDoToday.toString();
+            for (Map.Entry<String, ArrayList<String>> set : toDoToday.entrySet()) {
+
+                ArrayList<String> respondList = set.getValue();
+
+                textPopUp += respondList.get(0) + " : - " + respondList.get(1) + "\n";
+                for (int counter = 2; counter < respondList.size(); counter++) {
+                    int size = respondList.get(0).length();
+                    for(int i = 0; i < size; i++) {
+                        textPopUp += "  ";
                     }
-                });
+                    textPopUp += "   - " + respondList.get(counter) +"\n";
+                }
+                textPopUp+= "\n";
+            }
 
-
-        popup.show();
+            TextView popupText =  popup.findViewById(R.id.popup_text);
+            popupText.setText(textPopUp);
+            if(!textPopUp.isEmpty())
+                popup.show();
+            return null;
+        });
     }
 }
