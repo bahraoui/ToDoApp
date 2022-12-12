@@ -100,6 +100,36 @@ public class activity_in_list extends AppCompatActivity {
         popup_item = new Dialog(this);
         popup_liste = new Dialog(this);
         majUI();
+        EventListener<QuerySnapshot> eventListenerUpdateItems = new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null || value.getMetadata().isFromCache()){
+                    return;
+                }
+
+                for (DocumentChange dc : value.getDocumentChanges()) {
+                    DocumentSnapshot dcs = dc.getDocument();
+
+                    switch (dc.getType()){
+                        case ADDED:
+                            if (isFirstLaunch.get()){
+                                majUI();
+                            }
+                            break;
+                        case REMOVED:
+                            if (isFirstLaunch.get()){
+                                majUI();
+                            }
+                            break;
+                        case MODIFIED:
+                            majUI();
+                            break;
+                    }
+                }
+            }
+        };
+        isFirstLaunch.set(false);
+        listesRef.addSnapshotListener(eventListenerUpdateItems);
     }
 
     private void deleteList(Dialog _dialog) {
@@ -146,36 +176,6 @@ public class activity_in_list extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        EventListener<QuerySnapshot> eventListenerUpdateItems = new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null || value.getMetadata().isFromCache()){
-                    return;
-                }
-
-                for (DocumentChange dc : value.getDocumentChanges()) {
-                    DocumentSnapshot dcs = dc.getDocument();
-
-                    switch (dc.getType()){
-                        case ADDED:
-                            if (isFirstLaunch.get()){
-                                majUI();
-                            }
-                            break;
-                        case REMOVED:
-                            if (isFirstLaunch.get()){
-                                majUI();
-                            }
-                            break;
-                        case MODIFIED:
-                            majUI();
-                            break;
-                    }
-                }
-            }
-        };
-        isFirstLaunch.set(false);
-        listesRef.addSnapshotListener(eventListenerUpdateItems);
     }
 
     synchronized private void addItemUI(TDA_Item tda_item){
