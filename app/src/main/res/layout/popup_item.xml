@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="350dp"
-        android:layout_height="650dp"
+        android:layout_height="700dp"
         android:background="@drawable/background_popup_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +83,7 @@
             android:id="@+id/popup_item_element_modification_tv_subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
             android:text="Donner une date d'échéance"
             android:textColor="@color/white"
@@ -118,6 +118,24 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            android:id="@+id/pop_item_modification_btn_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_button_red"
+            android:text="Supprimer"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/white"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/pop_item_modification_btn_create"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
             android:id="@+id/pop_item_modification_btn_create"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,9 +150,8 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

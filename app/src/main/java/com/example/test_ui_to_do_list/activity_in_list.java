@@ -310,7 +310,7 @@ public class activity_in_list extends AppCompatActivity {
         close = (TextView) popup_item.findViewById(R.id.popup_item_closeWindows);
         nameItem[0] = (EditText) popup_item.findViewById(R.id.popup_item_modification_et_name);
         calendarView[0] = (CalendarView) popup_item.findViewById(R.id.popup_item_simpleCalendarView);
-        validationModifItem = (Button) popup_item.findViewById(R.id.pop_item_modification_btn_create);
+        validationModifItem = (Button) popup_item.findViewById(R.id.pop_item_modification_btn_delete);
 
         nameItem[0].setText(itemSelectModif.getIt_Name());
         calendarView[0].setDate(itemSelectModif.getIt_ObjectifDate().getTime());
