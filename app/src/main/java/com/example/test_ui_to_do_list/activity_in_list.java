@@ -158,10 +158,14 @@ public class activity_in_list extends AppCompatActivity {
 
                     switch (dc.getType()){
                         case ADDED:
+                            if (isFirstLaunch.get()){
                                 majUI();
+                            }
                             break;
                         case REMOVED:
+                            if (isFirstLaunch.get()){
                                 majUI();
+                            }
                             break;
                         case MODIFIED:
                             majUI();
