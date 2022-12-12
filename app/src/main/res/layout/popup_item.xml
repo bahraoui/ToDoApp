@@ -130,13 +130,13 @@
             android:textColorHint="@color/white"
             android:textSize="17dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/pop_item_modification_btn_create"
+            app:layout_constraintBottom_toTopOf="@+id/pop_item_modification_btn_modify"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/pop_item_modification_btn_create"
+            android:id="@+id/pop_item_modification_btn_modify"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
