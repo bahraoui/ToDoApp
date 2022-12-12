@@ -129,7 +129,7 @@ public class activity_in_list extends AppCompatActivity {
             }
         };
         isFirstLaunch.set(false);
-        listesRef.addSnapshotListener(eventListenerUpdateItems);
+        listesRef.addSnapshotListener(this,eventListenerUpdateItems);
     }
 
     private void deleteList(Dialog _dialog) {
