@@ -365,7 +365,7 @@ public class activity_in_list extends AppCompatActivity {
         et2.setText(tda_liste.getLi_Name());
         Drawable drawableListIcon = new BitmapDrawable(getResources(), tda_liste.getLi_drawable());
         for(ImageView iv : logos){
-            if(iv.getDrawable()==drawableListIcon){
+            if(iv.getDrawable()==getResources().getDrawable(tda_liste.strToIdDrawable())){
                 selectIconDrawable(iv);
             }
         }
