@@ -202,7 +202,7 @@ public class activity_list extends AppCompatActivity {
 
         // icone
         ImageView iv_icon = view.findViewById(R.id.myImage_element_1);
-        iv_icon.setImageDrawable(new BitmapDrawable(getResources(), tda_liste.getLi_drawable()));
+        iv_icon.setImageDrawable(getResources().getDrawable(tda_liste.strToIdDrawable()));
 
         ConstraintLayout cl = view.findViewById(R.id.myView_list_constraintLayout);
         cl.setOnClickListener(v -> {

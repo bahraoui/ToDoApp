@@ -213,11 +213,13 @@ public class activity_in_list extends AppCompatActivity {
 
         ImageView crayon = view.findViewById(R.id.item_img_modify);
         crayon.setOnClickListener(view3 -> {
-            popup_item = new Dialog(this);
+            //popup_item = new Dialog(this);
+            tda_liste = (TDA_Liste) getIntent().getSerializableExtra("tda_liste");
             for (TDA_Item it :
                     tda_liste.getLi_List()) {
                 if(it.getId() == tda_item.getId()){
                     itemSelectModif = it;
+                    Toast.makeText(this,"added via id",Toast.LENGTH_SHORT).show();
                     break;
                 }
             }
@@ -257,7 +259,7 @@ public class activity_in_list extends AppCompatActivity {
 
         // icone liste
         ImageView iv_icon = findViewById(R.id.inlist_iv_icon);
-        iv_icon.setImageDrawable(new BitmapDrawable(getResources(), tda_liste.getLi_drawable()));
+        iv_icon.setImageDrawable(getResources().getDrawable(tda_liste.strToIdDrawable()));
         // titre liste
         tv_TitleList.setText(tda_liste.getLi_Name());
 
@@ -381,7 +383,7 @@ public class activity_in_list extends AppCompatActivity {
                 // afficher qu'il n'ya eu aucun changement
             } else {
                 tda_liste.setLi_Name(newNameList);
-                tda_liste.setLi_drawable(TDA_Liste.drawableToBitmap(imgSelectionne.getDrawable()));
+                tda_liste.setLi_drawable((String) imgSelectionne.getTag());
                 listesRef.document(tda_liste.getId()).update("li_Name",tda_liste.getLi_Name(),
                         "li_drawable",tda_liste.getLi_drawable());
                 popup_liste.dismiss();
@@ -412,34 +414,44 @@ public class activity_in_list extends AppCompatActivity {
         imgSelectionne = (ImageView) v;
         switch (imgSelectionne.getId()){
             case R.id.logo1:
-                imgSelectionne.setTag(R.drawable.ic_autres);
+                //imgSelectionne.setTag(R.drawable.ic_autres);
+                imgSelectionne.setTag("logo1");
                 break;
             case R.id.logo2:
-                imgSelectionne.setTag(R.drawable.ic_flatware);
+                //imgSelectionne.setTag(R.drawable.ic_flatware);
+                imgSelectionne.setTag("logo2");
                 break;
             case R.id.logo3:
-                imgSelectionne.setTag(R.drawable.ic_baseline_fastfood_24);
+                //imgSelectionne.setTag(R.drawable.ic_baseline_fastfood_24);
+                imgSelectionne.setTag("logo3");
                 break;
             case R.id.logo4:
-                imgSelectionne.setTag(R.drawable.ic_baseline_shopping_cart);
+                //imgSelectionne.setTag(R.drawable.ic_baseline_shopping_cart);
+                imgSelectionne.setTag("logo4");
                 break;
             case R.id.logo5:
-                imgSelectionne.setTag(R.drawable.ic_car);
+                //imgSelectionne.setTag(R.drawable.ic_car);
+                imgSelectionne.setTag("logo5");
                 break;
             case R.id.logo6:
-                imgSelectionne.setTag(R.drawable.ic_flight);
+                //imgSelectionne.setTag(R.drawable.ic_flight);
+                imgSelectionne.setTag("logo6");
                 break;
             case R.id.logo7:
-                imgSelectionne.setTag(R.drawable.ic_baseline_account_balance_24);
+                //imgSelectionne.setTag(R.drawable.ic_baseline_account_balance_24);
+                imgSelectionne.setTag("logo7");
                 break;
             case R.id.logo8:
-                imgSelectionne.setTag(R.drawable.ic_home);
+                //imgSelectionne.setTag(R.drawable.ic_home);
+                imgSelectionne.setTag("logo8");
                 break;
             case R.id.logo9:
-                imgSelectionne.setTag(R.drawable.ic_baseline_local_phone_24);
+                //imgSelectionne.setTag(R.drawable.ic_baseline_local_phone_24);
+                imgSelectionne.setTag("logo9");
                 break;
             case R.id.logo10:
-                imgSelectionne.setTag(R.drawable.ic_baseline_medication_24);
+                //imgSelectionne.setTag(R.drawable.ic_baseline_medication_24);
+                imgSelectionne.setTag("logo10");
                 break;
         }
         imgSelectionne.setBackground(getResources().getDrawable(R.drawable.background_selection_icon));

@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -106,14 +107,15 @@ public class activity_list_creation extends AppCompatActivity {
         dbList.addNewList(name_NewList, false, "");
 
         // ajout liste firebase
-        final DocumentReference[] refAdded = new DocumentReference[1];
+        DocumentReference refAdded;
         String id_liste;
-        refAdded[0] = listesRef.document();
-        id_liste = refAdded[0].getId();
+        refAdded = listesRef.document();
+        id_liste = refAdded.getId();
         // creation de l'objet liste
         TDA_Liste new_liste = new TDA_Liste(name_NewList, mAuth.getCurrentUser().getUid());
 
         // set icone
+        /*
         StorageReference iconRef = storageRef.child("bitmap_icons/"+(String) imgSelectionne.getTag()+".jpg");
         iconRef.getDownloadUrl()
                 // si le fichier n'existe pas
@@ -129,27 +131,32 @@ public class activity_list_creation extends AppCompatActivity {
                 }).continueWith(task -> {
                     iconRef.getBytes(1024 * 1024).addOnSuccessListener(b -> {
                         //Drawable image = new BitmapDrawable(getResources(),BitmapFactory.decodeByteArray(b, 0, b.length));
-                        new_liste.setLi_drawable((String) imgSelectionne.getTag());
+                        new_liste.setLi_drawable(Blob.fromBytes(b));
                     }).continueWith(task1 -> {
-                        // set liste id
-                        new_liste.setId(id_liste);
-                        // ajout a la base de donnees
-                        refAdded[0].set(new_liste);
-                        // ajout id liste a la base de donnes
-                        refAdded[0] = userListes.document();
-                        HashMap<String, String> identifiantsListe = new HashMap<>();
-                        identifiantsListe.put("nom_liste",name_NewList);
-                        identifiantsListe.put("id_liste",id_liste);
-                        identifiantsListe.put("ownerId",mAuth.getCurrentUser().getUid());
-                        refAdded[0].set(identifiantsListe);
-                        // listesRef.add(new TDA_Liste(name_NewList));
-                        Toast.makeText(activity_list_creation.this, "liste  ajoutee", Toast.LENGTH_SHORT).show();
-                        dbList.close();
-                        finish();
+
+         */
+        new_liste.setLi_drawable((String) imgSelectionne.getTag());
+        // set liste id;
+        new_liste.setId(id_liste);
+        // ajout a la base de donnees
+        refAdded.set(new_liste);
+        // ajout id liste a la base de donnes
+        refAdded = userListes.document();
+        HashMap<String, String> identifiantsListe = new HashMap<>();
+        identifiantsListe.put("nom_liste",name_NewList);
+        identifiantsListe.put("id_liste",id_liste);
+        identifiantsListe.put("ownerId",mAuth.getCurrentUser().getUid());
+        refAdded.set(identifiantsListe);
+        // listesRef.add(new TDA_Liste(name_NewList));
+        Toast.makeText(activity_list_creation.this, "liste  ajoutee", Toast.LENGTH_SHORT).show();
+        dbList.close();
+        finish();
+                        /*
                         return null;
                     });
                     return null;
                 });
+*/
     }
 
     public void selectIconDrawable(View v){
@@ -159,34 +166,44 @@ public class activity_list_creation extends AppCompatActivity {
         imgSelectionne = (ImageView) v;
         switch (imgSelectionne.getId()){
             case R.id.logo1:
-                imgSelectionne.setTag(R.drawable.ic_autres);
+                //imgSelectionne.setTag(R.drawable.ic_autres);
+                imgSelectionne.setTag("logo1");
                 break;
             case R.id.logo2:
-                imgSelectionne.setTag(R.drawable.ic_flatware);
+                //imgSelectionne.setTag(R.drawable.ic_flatware);
+                imgSelectionne.setTag("logo2");
                 break;
             case R.id.logo3:
-                imgSelectionne.setTag(R.drawable.ic_baseline_fastfood_24);
+                //imgSelectionne.setTag(R.drawable.ic_baseline_fastfood_24);
+                imgSelectionne.setTag("logo3");
                 break;
             case R.id.logo4:
-                imgSelectionne.setTag(R.drawable.ic_baseline_shopping_cart);
+                //imgSelectionne.setTag(R.drawable.ic_baseline_shopping_cart);
+                imgSelectionne.setTag("logo4");
                 break;
             case R.id.logo5:
-                imgSelectionne.setTag(R.drawable.ic_car);
+                //imgSelectionne.setTag(R.drawable.ic_car);
+                imgSelectionne.setTag("logo5");
                 break;
             case R.id.logo6:
-                imgSelectionne.setTag(R.drawable.ic_flight);
+                //imgSelectionne.setTag(R.drawable.ic_flight);
+                imgSelectionne.setTag("logo6");
                 break;
             case R.id.logo7:
-                imgSelectionne.setTag(R.drawable.ic_baseline_account_balance_24);
+                //imgSelectionne.setTag(R.drawable.ic_baseline_account_balance_24);
+                imgSelectionne.setTag("logo7");
                 break;
             case R.id.logo8:
-                imgSelectionne.setTag(R.drawable.ic_home);
+                //imgSelectionne.setTag(R.drawable.ic_home);
+                imgSelectionne.setTag("logo8");
                 break;
             case R.id.logo9:
-                imgSelectionne.setTag(R.drawable.ic_baseline_local_phone_24);
+                //imgSelectionne.setTag(R.drawable.ic_baseline_local_phone_24);
+                imgSelectionne.setTag("logo9");
                 break;
             case R.id.logo10:
-                imgSelectionne.setTag(R.drawable.ic_baseline_medication_24);
+                //imgSelectionne.setTag(R.drawable.ic_baseline_medication_24);
+                imgSelectionne.setTag("logo10");
                 break;
         }
         imgSelectionne.setBackground(getResources().getDrawable(R.drawable.background_selection_icon));

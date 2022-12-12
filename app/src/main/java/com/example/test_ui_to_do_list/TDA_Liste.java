@@ -143,4 +143,81 @@ public class TDA_Liste implements Serializable {
         drawable.draw(canvas);
         return bitmap;
     }
+
+    public int strToIdDrawable(){
+        int drawableId = 0;
+        switch (li_drawable){
+            case "logo1":
+                drawableId = R.drawable.ic_autres;
+                break;
+            case "logo2":
+                drawableId = R.drawable.ic_flatware;
+                break;
+            case "logo3":
+                drawableId = R.drawable.ic_baseline_fastfood_24;
+                break;
+            case "logo4":
+                drawableId = R.drawable.ic_baseline_shopping_cart;
+                break;
+            case "logo5":
+                drawableId = R.drawable.ic_car;
+                break;
+            case "logo6":
+                drawableId = R.drawable.ic_flight;
+                break;
+            case "logo7":
+                drawableId = R.drawable.ic_baseline_account_balance_24;
+                break;
+            case "logo8":
+                drawableId = R.drawable.ic_home;
+                break;
+            case "logo9":
+                drawableId = R.drawable.ic_baseline_local_phone_24;
+                break;
+            case "logo10":
+                drawableId = R.drawable.ic_baseline_medication_24;
+                break;
+        }
+        drawableId = drawableId == 0 ? R.drawable.ic_autres : drawableId;
+        return drawableId;
+    }
+
+    public static int strToIdDrawable(String str){
+        if(str==null) return R.drawable.ic_autres;
+        int drawableId = 0;
+        switch (str){
+            case "logo1":
+                drawableId = R.drawable.ic_autres;
+                break;
+            case "logo2":
+                drawableId = R.drawable.ic_flatware;
+                break;
+            case "logo3":
+                drawableId = R.drawable.ic_baseline_fastfood_24;
+                break;
+            case "logo4":
+                drawableId = R.drawable.ic_baseline_shopping_cart;
+                break;
+            case "logo5":
+                drawableId = R.drawable.ic_car;
+                break;
+            case "logo6":
+                drawableId = R.drawable.ic_flight;
+                break;
+            case "logo7":
+                drawableId = R.drawable.ic_baseline_account_balance_24;
+                break;
+            case "logo8":
+                drawableId = R.drawable.ic_home;
+                break;
+            case "logo9":
+                drawableId = R.drawable.ic_baseline_local_phone_24;
+                break;
+            case "logo10":
+                drawableId = R.drawable.ic_baseline_medication_24;
+                break;
+        }
+        drawableId = drawableId == 0 ? R.drawable.ic_autres : drawableId;
+        return drawableId;
+    }
 }
