@@ -333,6 +333,7 @@ public class activity_in_list extends AppCompatActivity {
                     itemSelectModif.setIt_ObjectifDate(new Date(calendarView[0].getDate()));
                     listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
                     popup_item.dismiss();
+                    majUI();
                 } else {
                     String afficher = "aucun changement";
                     Toast.makeText(activity_in_list.this,afficher,Toast.LENGTH_SHORT).show();
