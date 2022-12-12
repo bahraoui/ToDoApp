@@ -55,13 +55,18 @@ public class activity_element_creation extends AppCompatActivity {
         btn_CreateNewItem = findViewById(R.id.itemadd_btn_create);
 
         btn_CreateNewItem.setOnClickListener(view -> {
-            ajouterItem();
+            TDA_Liste li = ajouterItem();
+            if(li == null) return;
+            listesRef.document(li.getId()).update("li_List",li.getLi_List()).continueWith(f -> {
+                finish();
+                return null;
+            });
         });
     }
 
 
 
-    private void ajouterItem(){
+    private TDA_Liste ajouterItem(){
         /*
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which){
@@ -96,7 +101,7 @@ public class activity_element_creation extends AppCompatActivity {
 
         if (name_item.isEmpty()){
             Toast.makeText(this, "Veuillez donner un nom a votre item", Toast.LENGTH_SHORT).show();
-            return;
+            return null;
         }
 
         TDA_Liste li = (TDA_Liste) getIntent().getSerializableExtra("tda_liste_ajout_item");
@@ -104,11 +109,8 @@ public class activity_element_creation extends AppCompatActivity {
 
 
         // ajout liste firebase
-        Map<String, Object> addedMap = new HashMap<>();
-        addedMap.put("li_List",li.getLi_List());
         Toast.makeText(getApplicationContext(), "ajout item liste id "+li.getId()+"\nname : "+li.getLi_Name(), Toast.LENGTH_LONG).show();
-        listesRef.document(li.getId()).update("li_List",li.getLi_List());
-        finish();
+        return li;
     }
 
     //Convert Date to Calendar
