@@ -36,10 +36,10 @@
             android:id="@+id/popup_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="40dp"
             android:text="Tâches du jour"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,13 +49,12 @@
             android:id="@+id/popup_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6 déc : Courses"
+            android:layout_marginTop="32dp"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/popup_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
