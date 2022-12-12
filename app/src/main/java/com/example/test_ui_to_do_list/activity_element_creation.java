@@ -58,7 +58,6 @@ public class activity_element_creation extends AppCompatActivity {
             TDA_Liste li = ajouterItem();
             if(li == null) return;
             listesRef.document(li.getId()).update("li_List",li.getLi_List()).continueWith(f -> {
-                finish();
                 Intent intent = new Intent(this, activity_in_list.class);
                 intent.putExtra("tda_liste",li);
                 startActivity(intent);
