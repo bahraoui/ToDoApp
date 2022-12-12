@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -342,30 +343,29 @@ public class activity_in_list extends AppCompatActivity {
     }
 
     public void showPopup_liste(){
-        ArrayList<ImageView> logos;
-        logos = new ArrayList<>();
+        HashMap<ImageView,String> logosMap = new HashMap<>();
         popup_liste.setContentView(R.layout.popup_liste);
         popup_liste.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         imgSelectionne = popup_liste.findViewById(R.id.logo5);
         imgSelectionne.setTag(R.drawable.ic_car);
-        logos.add(popup_liste.findViewById(R.id.logo1));
-        logos.add(popup_liste.findViewById(R.id.logo2));
-        logos.add(popup_liste.findViewById(R.id.logo3));
-        logos.add(popup_liste.findViewById(R.id.logo4));
-        logos.add(popup_liste.findViewById(R.id.logo5));
-        logos.add(popup_liste.findViewById(R.id.logo6));
-        logos.add(popup_liste.findViewById(R.id.logo7));
-        logos.add(popup_liste.findViewById(R.id.logo8));
-        logos.add(popup_liste.findViewById(R.id.logo9));
-        logos.add(popup_liste.findViewById(R.id.logo10));
+        logosMap.put(popup_liste.findViewById(R.id.logo1),"logo1");
+        logosMap.put(popup_liste.findViewById(R.id.logo2),"logo2");
+        logosMap.put(popup_liste.findViewById(R.id.logo3),"logo3");
+        logosMap.put(popup_liste.findViewById(R.id.logo4),"logo4");
+        logosMap.put(popup_liste.findViewById(R.id.logo5),"logo5");
+        logosMap.put(popup_liste.findViewById(R.id.logo6),"logo6");
+        logosMap.put(popup_liste.findViewById(R.id.logo7),"logo7");
+        logosMap.put(popup_liste.findViewById(R.id.logo8),"logo8");
+        logosMap.put(popup_liste.findViewById(R.id.logo9),"logo9");
+        logosMap.put(popup_liste.findViewById(R.id.logo10),"logo10");
         selectIconDrawable(popup_liste.findViewById(R.id.logo1));
 
         // default value
         EditText et2 = (EditText) popup_liste.findViewById(R.id.popup_liste_modification_et_name);
         et2.setText(tda_liste.getLi_Name());
-        Drawable drawableListIcon = new BitmapDrawable(getResources(), tda_liste.getLi_drawable());
-        for(ImageView iv : logos){
-            if(iv.getDrawable()==getResources().getDrawable(tda_liste.strToIdDrawable())){
+        //Drawable drawableListIcon = new BitmapDrawable(getResources(), tda_liste.getLi_drawable());
+        for(ImageView iv : logosMap.keySet()){
+            if(logosMap.get(iv).equals(tda_liste.getLi_drawable())){
                 selectIconDrawable(iv);
             }
         }
