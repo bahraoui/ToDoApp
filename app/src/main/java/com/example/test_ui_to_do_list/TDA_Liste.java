@@ -1,5 +1,8 @@
 package com.example.test_ui_to_do_list;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import java.io.Serializable;
@@ -12,7 +15,7 @@ public class TDA_Liste implements Serializable {
     private String li_desc;
     private boolean li_isFinish;
     private String li_Name;
-    private Drawable li_drawable;
+    private Bitmap li_drawable;
     private String id;
     private String ownerId;
 
@@ -103,11 +106,11 @@ public class TDA_Liste implements Serializable {
         this.id = _id;
     }
 
-    public Drawable getLi_drawable() {
+    public Bitmap getLi_drawable() {
         return li_drawable;
     }
 
-    public void setLi_drawable(Drawable li_drawable) {
+    public void setLi_drawable(Bitmap li_drawable) {
         this.li_drawable = li_drawable;
     }
 
@@ -117,5 +120,27 @@ public class TDA_Liste implements Serializable {
 
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        Bitmap bitmap = null;
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 }

@@ -1,5 +1,10 @@
 package com.example.test_ui_to_do_list;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -79,4 +84,5 @@ public class TDA_Item implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+
 }

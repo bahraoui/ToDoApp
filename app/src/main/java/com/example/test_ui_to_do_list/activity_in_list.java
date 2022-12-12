@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -256,7 +257,7 @@ public class activity_in_list extends AppCompatActivity {
 
         // icone liste
         ImageView iv_icon = findViewById(R.id.inlist_iv_icon);
-        iv_icon.setImageDrawable(tda_liste.getLi_drawable());
+        iv_icon.setImageDrawable(new BitmapDrawable(getResources(), tda_liste.getLi_drawable()));
         // titre liste
         tv_TitleList.setText(tda_liste.getLi_Name());
 
@@ -360,8 +361,9 @@ public class activity_in_list extends AppCompatActivity {
         // default value
         EditText et2 = (EditText) popup_liste.findViewById(R.id.popup_liste_modification_et_name);
         et2.setText(tda_liste.getLi_Name());
+        Drawable drawableListIcon = new BitmapDrawable(getResources(), tda_liste.getLi_drawable());
         for(ImageView iv : logos){
-            if(iv.getDrawable()==tda_liste.getLi_drawable()){
+            if(iv.getDrawable()==drawableListIcon){
                 selectIconDrawable(iv);
             }
         }
@@ -372,13 +374,14 @@ public class activity_in_list extends AppCompatActivity {
             EditText et = (EditText) popup_liste.findViewById(R.id.popup_liste_modification_et_name);
             String newNameList = et.getText().toString();
             if(newNameList.isEmpty()) return;
+            Drawable drawableListIcon2 = new BitmapDrawable(getResources(), tda_liste.getLi_drawable());
             if (tda_liste.getLi_Name().equals(newNameList)
-                    && tda_liste.getLi_drawable() == imgSelectionne.getDrawable()){
+                    && drawableListIcon2  == imgSelectionne.getDrawable()){
                 Toast.makeText(this,"aucun changement",Toast.LENGTH_SHORT).show();
                 // afficher qu'il n'ya eu aucun changement
             } else {
                 tda_liste.setLi_Name(newNameList);
-                tda_liste.setLi_drawable(imgSelectionne.getDrawable());
+                tda_liste.setLi_drawable(TDA_Liste.drawableToBitmap(imgSelectionne.getDrawable()));
                 listesRef.document(tda_liste.getId()).update("li_Name",tda_liste.getLi_Name(),
                         "li_drawable",tda_liste.getLi_drawable());
                 popup_liste.dismiss();

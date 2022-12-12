@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -201,7 +202,7 @@ public class activity_list extends AppCompatActivity {
 
         // icone
         ImageView iv_icon = view.findViewById(R.id.myImage_element_1);
-        iv_icon.setImageDrawable(tda_liste.getLi_drawable());
+        iv_icon.setImageDrawable(new BitmapDrawable(getResources(), tda_liste.getLi_drawable()));
 
         ConstraintLayout cl = view.findViewById(R.id.myView_list_constraintLayout);
         cl.setOnClickListener(v -> {
