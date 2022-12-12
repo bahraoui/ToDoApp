@@ -175,11 +175,7 @@ public class activity_in_list extends AppCompatActivity {
             }
         };
         isFirstLaunch.set(false);
-        try {
-            listesRef.addSnapshotListener(eventListenerUpdateItems).wait(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        listesRef.addSnapshotListener(eventListenerUpdateItems);
     }
 
     synchronized private void addItemUI(TDA_Item tda_item){
