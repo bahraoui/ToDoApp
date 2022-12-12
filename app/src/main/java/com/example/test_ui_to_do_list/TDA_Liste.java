@@ -15,7 +15,7 @@ public class TDA_Liste implements Serializable {
     private String li_desc;
     private boolean li_isFinish;
     private String li_Name;
-    private Bitmap li_drawable;
+    private String li_drawable;
     private String id;
     private String ownerId;
 
@@ -106,11 +106,11 @@ public class TDA_Liste implements Serializable {
         this.id = _id;
     }
 
-    public Bitmap getLi_drawable() {
+    public String getLi_drawable() {
         return li_drawable;
     }
 
-    public void setLi_drawable(Bitmap li_drawable) {
+    public void setLi_drawable(String li_drawable) {
         this.li_drawable = li_drawable;
     }
 
