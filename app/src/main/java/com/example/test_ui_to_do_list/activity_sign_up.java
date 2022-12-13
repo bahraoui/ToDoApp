@@ -20,6 +20,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class activity_sign_up extends AppCompatActivity {
@@ -74,6 +77,10 @@ public class activity_sign_up extends AppCompatActivity {
                     data.put("prenom",prenom.getText().toString());
                     data.put("email",_email);
                     refAdded.set(data);
+                    ArrayList<String> idListes = new ArrayList<>();
+                    idListes.add("id1");
+                    idListes.add("id1");
+                    usersRef.document(refAdded.getId()).update("testnew",idListes);
                     Toast.makeText(activity_sign_up.this, "Enregistrement Reussi!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(activity_sign_up.this, MainActivity.class));
                     finish();
