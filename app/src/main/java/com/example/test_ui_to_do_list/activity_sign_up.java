@@ -79,9 +79,7 @@ public class activity_sign_up extends AppCompatActivity {
                     data.put("email",_email);
                     refAdded.set(data);
                     ArrayList<String> idListes = new ArrayList<>();
-                    idListes.add("id1");
-                    idListes.add("id1");
-                    usersRef.document(refAdded.getId()).update("testnew",idListes);
+                    usersRef.document(refAdded.getId()).update("listePartagee",idListes);
                     Toast.makeText(activity_sign_up.this, "Enregistrement Reussi!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(activity_sign_up.this, MainActivity.class));
                     finish();

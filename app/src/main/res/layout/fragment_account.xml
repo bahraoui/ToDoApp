@@ -79,7 +79,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/fragmentAccount_prenom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -104,7 +104,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/fragmentAccount_nom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -131,7 +131,7 @@
             app:layout_constraintTop_toBottomOf="@+id/inlist_tv_title" />
 
         <EditText
-            android:id="@+id/account_mail"
+            android:id="@+id/fragmentaccount_mail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -166,7 +166,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/account_mail" />
+            app:layout_constraintTop_toBottomOf="@+id/fragmentaccount_mail" />
 
         <Button
             android:id="@+id/account_pass_change2"

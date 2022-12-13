@@ -11,8 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,8 +32,11 @@ public class FragmentAccount extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String prenomSTR;
+    private String nomSTR;
+    private String emailSTR;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference usersRef = db.collection("Users");
 
     public FragmentAccount() {
         // Required empty public constructor
@@ -55,9 +63,18 @@ public class FragmentAccount extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        usersRef.get().addOnSuccessListener(getActivity(),queryDocumentSnapshots -> {
+            for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
+                if(dcs.get("a",String.class).equals("")) {
+                    prenomSTR = dcs.get("prenom", String.class);
+                    nomSTR = dcs.get("nom", String.class);
+                    emailSTR = dcs.get("email",String.class);
+                }
+            }
+        });
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            prenomSTR = getArguments().getString(ARG_PARAM1);
+            nomSTR = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -71,6 +88,12 @@ public class FragmentAccount extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Button btn_deco = getView().findViewById(R.id.account_pass_change2);
+        TextView prenomTv = getView().findViewById(R.id.fragmentAccount_prenom);
+        TextView nomTv = getView().findViewById(R.id.fragmentAccount_nom);
+        EditText emailEt = getView().findViewById(R.id.fragmentaccount_mail);
+        prenomTv.setText(prenomSTR);
+        nomTv.setText(nomSTR);
+        emailEt.setText(emailSTR);
         btn_deco.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getActivity(),MainActivity.class));

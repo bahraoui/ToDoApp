@@ -223,7 +223,6 @@ public class activity_list extends AppCompatActivity {
         }
         progress.setText(Integer.toString(Math.round(progress_pourcentage))+"%");
 
-
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(50, 50, 50, 0);
@@ -236,7 +235,7 @@ public class activity_list extends AppCompatActivity {
         //ArrayList<TDA_Liste> toutes_listes = dbList.readLists();
         ViewGroup main = this.findViewById(R.id.list_constLayout_insertPoint);
         main.removeAllViews();
-        listesRef.get()
+        listesRef.whereEqualTo("ownerId",mAuth.getCurrentUser().getUid()).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
