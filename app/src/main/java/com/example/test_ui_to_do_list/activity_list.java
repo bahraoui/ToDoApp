@@ -204,9 +204,9 @@ public class activity_list extends AppCompatActivity {
         // liste partagee ou non:
         ImageView elementShared = view.findViewById(R.id.myImage_element1_shared);
         if(owner){
-            elementShared.setVisibility(View.VISIBLE);
-        } else {
             elementShared.setVisibility(View.GONE);
+        } else {
+            elementShared.setVisibility(View.VISIBLE);
         }
 
         ConstraintLayout cl = view.findViewById(R.id.myView_list_constraintLayout);
