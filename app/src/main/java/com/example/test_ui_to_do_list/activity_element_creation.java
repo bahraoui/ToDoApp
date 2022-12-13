@@ -84,7 +84,7 @@ public class activity_element_creation extends AppCompatActivity {
         };*/
         /*
         if(selectedDate.compareTo((Calendar.getInstance().getTime())) < 0){
-            Toast.makeText(this, "Veuillez sélectionner une date posterieure à celle actuelle", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Veuillez sélectionner une date posterieure à celle actuelle",Toast.LENGTH_SHORT).show();
             \/*
             AlertDialog.Builder ab = new AlertDialog.Builder(this);
             ab.setMessage("Vous allez sélectionner une date posterieure")
