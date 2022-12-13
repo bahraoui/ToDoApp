@@ -189,7 +189,7 @@ public class activity_list extends AppCompatActivity {
 */
     }
 
-    private void addListUI(TDA_Liste tda_liste, ViewGroup main){
+    private void addListUI(TDA_Liste tda_liste, ViewGroup main, boolean owner){
         LayoutInflater li = getLayoutInflater();
         View view = li.inflate(R.layout.my_view_list, null);
 
@@ -200,6 +200,14 @@ public class activity_list extends AppCompatActivity {
         // icone
         ImageView iv_icon = view.findViewById(R.id.myImage_element_1);
         iv_icon.setImageDrawable(getResources().getDrawable(tda_liste.strToIdDrawable()));
+
+        // liste partagee ou non:
+        ImageView elementShared = view.findViewById(R.id.myImage_element1_shared);
+        if(owner){
+            elementShared.setVisibility(View.VISIBLE);
+        } else {
+            elementShared.setVisibility(View.GONE);
+        }
 
         ConstraintLayout cl = view.findViewById(R.id.myView_list_constraintLayout);
         cl.setOnClickListener(v -> {
@@ -249,7 +257,7 @@ public class activity_list extends AppCompatActivity {
                                         // la liste en question est une liste partagee
                                         // mettre un icone de partage ici pour l'indiquer
                                     }*/
-                                    addListUI(liste_tmp, main);
+                                    addListUI(liste_tmp, main, liste_tmp.getOwnerId().equals(mAuth.getCurrentUser().getUid()));
                                 }
                             }
                         }
