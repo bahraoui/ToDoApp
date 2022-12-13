@@ -56,7 +56,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class activity_list extends AppCompatActivity {
 
     private TextView btn_AddNewList;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private DBHandlerList dbList;
     private int nbViews;
     private String textPopUp;
@@ -117,11 +117,7 @@ public class activity_list extends AppCompatActivity {
             }
         });
 
-
-        mAuth = FirebaseAuth.getInstance();
         nbViews = 0;
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        mAuth.getCurrentUser().getUid();
         /*
 
         if(currentUser == null){
