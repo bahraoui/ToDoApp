@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/myView_element_1_name"
-            android:layout_width="200dp"
+            android:layout_width="160dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:autoSizeMaxTextSize="30sp"
@@ -36,6 +36,13 @@
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/myImage_element1_shared"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/ic_baseline_share_24" />
 
         <TextView
             android:id="@+id/myView_element_1_progress"
