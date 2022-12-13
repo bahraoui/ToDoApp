@@ -16,9 +16,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class activity_sign_up extends AppCompatActivity {
     public FirebaseAuth mAuth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference usersRef = db.collection("Users");
     EditText nom, prenom, email, password;
     Button inscription;
 
@@ -54,12 +61,19 @@ public class activity_sign_up extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(activity_sign_up.this, new OnCompleteListener<AuthResult>() {
+    private void registerUser(String _email, String password) {
+        mAuth.createUserWithEmailAndPassword(_email, password).addOnCompleteListener(activity_sign_up.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     //error message
+                    DocumentReference refAdded = usersRef.document();
+                    HashMap<String,String> data = new HashMap<>();
+                    data.put("id",refAdded.getId());
+                    data.put("nom",nom.getText().toString());
+                    data.put("prenom",prenom.getText().toString());
+                    data.put("email",_email);
+                    refAdded.set(data);
                     Toast.makeText(activity_sign_up.this, "Enregistrement Reussi!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(activity_sign_up.this, MainActivity.class));
                     finish();
