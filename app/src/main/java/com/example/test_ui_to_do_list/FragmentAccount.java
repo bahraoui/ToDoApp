@@ -63,15 +63,6 @@ public class FragmentAccount extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        usersRef.get().addOnSuccessListener(getActivity(),queryDocumentSnapshots -> {
-            for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
-                if(dcs.get("idUsersAuth",String.class).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                    prenomSTR = dcs.get("prenom", String.class);
-                    nomSTR = dcs.get("nom", String.class);
-                    emailSTR = dcs.get("email",String.class);
-                }
-            }
-        });
         if (getArguments() != null) {
             prenomSTR = getArguments().getString(ARG_PARAM1);
             nomSTR = getArguments().getString(ARG_PARAM2);
@@ -91,9 +82,18 @@ public class FragmentAccount extends Fragment {
         TextView prenomTv = getView().findViewById(R.id.fragmentAccount_prenom);
         TextView nomTv = getView().findViewById(R.id.fragmentAccount_nom);
         EditText emailEt = getView().findViewById(R.id.fragmentaccount_mail);
-        prenomTv.setText(prenomSTR);
-        nomTv.setText(nomSTR);
-        emailEt.setText(emailSTR);
+        usersRef.get().addOnSuccessListener(getActivity(),queryDocumentSnapshots -> {
+            for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
+                if(dcs.get("idUsersAuth",String.class).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                    prenomSTR = dcs.get("prenom", String.class);
+                    nomSTR = dcs.get("nom", String.class);
+                    emailSTR = dcs.get("email",String.class);
+                    prenomTv.setText(prenomSTR);
+                    nomTv.setText(nomSTR);
+                    emailEt.setText(emailSTR);
+                }
+            }
+        });
         btn_deco.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getActivity(),MainActivity.class));
