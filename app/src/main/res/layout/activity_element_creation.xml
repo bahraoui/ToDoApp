@@ -125,7 +125,7 @@
         app:layout_constraintTop_toBottomOf="@+id/itemcreation_et_name" />
 
         <Button
-            android:id="@+id/popup_creation_element_return"
+            android:id="@+id/creation_elemennt_close"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"

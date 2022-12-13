@@ -23,6 +23,7 @@ import java.util.Map;
 public class activity_element_creation extends AppCompatActivity {
     private EditText name_NewItem;
     private Button btn_CreateNewItem;
+    private Button btn_close;
     private CalendarView calendarView;
     private Date selectedDate;
 
@@ -53,6 +54,7 @@ public class activity_element_creation extends AppCompatActivity {
             selectedDate = calendarToDate(c);
         });
         btn_CreateNewItem = findViewById(R.id.itemadd_btn_create);
+        btn_close = findViewById(R.id.creation_elemennt_close);
 
         btn_CreateNewItem.setOnClickListener(view -> {
             TDA_Liste li = ajouterItem();
@@ -64,6 +66,10 @@ public class activity_element_creation extends AppCompatActivity {
                 finish();
                 return null;
             });
+        });
+
+        btn_close.setOnClickListener(v -> {
+            finish();
         });
     }
 
@@ -122,6 +128,12 @@ public class activity_element_creation extends AppCompatActivity {
         calendar.setTime(date);
         return calendar;
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     //Convert Calendar to Date
