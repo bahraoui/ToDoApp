@@ -83,7 +83,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="John"
                     android:textColor="@color/white"
                     android:textSize="17sp" />
             </LinearLayout>
@@ -108,7 +107,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="DOE"
                     android:textColor="@color/white"
                     android:textSize="17sp" />
             </LinearLayout>
@@ -140,7 +138,6 @@
             android:background="@drawable/background_edittext"
             android:drawablePadding="16dp"
             android:ems="10"
-            android:hint="E-mail"
             android:inputType="textPersonName"
             android:padding="16dp"
             android:textColor="@color/white"

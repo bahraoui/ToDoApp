@@ -324,7 +324,8 @@ public class activity_list extends AppCompatActivity {
 
         HashMap<String,ArrayList<String>> toDoToday = new HashMap<>();
         textPopUp = "";
-        listesRef.get().addOnSuccessListener(queryDocumentSnapshots -> {
+        listesRef.whereEqualTo("ownerId",mAuth.getCurrentUser().getUid())
+                .get().addOnSuccessListener(queryDocumentSnapshots -> {
               for (QueryDocumentSnapshot dcs : queryDocumentSnapshots) {
                   TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
                   if (liste_tmp != null) {
