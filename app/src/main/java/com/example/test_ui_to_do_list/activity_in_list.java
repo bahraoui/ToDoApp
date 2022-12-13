@@ -343,6 +343,7 @@ public class activity_in_list extends AppCompatActivity {
         supressItems.setOnClickListener(v -> {
             tda_liste.getLi_List().remove(itemSelectModif);
             listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
+            popup_item.dismiss();
         });
         popup_item.show();
     }
