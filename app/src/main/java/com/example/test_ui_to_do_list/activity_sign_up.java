@@ -72,7 +72,8 @@ public class activity_sign_up extends AppCompatActivity {
                     //error message
                     DocumentReference refAdded = usersRef.document();
                     HashMap<String,String> data = new HashMap<>();
-                    data.put("id",refAdded.getId());
+                    data.put("idUsersFirebase",refAdded.getId());
+                    data.put("idUsersAuth",mAuth.getCurrentUser().getUid());
                     data.put("nom",nom.getText().toString());
                     data.put("prenom",prenom.getText().toString());
                     data.put("email",_email);
