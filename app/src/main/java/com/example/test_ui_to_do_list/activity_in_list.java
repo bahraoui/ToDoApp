@@ -85,6 +85,8 @@ public class activity_in_list extends AppCompatActivity {
         });
 
         tv_ReturnButton.setOnClickListener(view -> {
+            Intent intent = new Intent(this, activity_list.class);
+            startActivity(intent);
             finish();
         });
 
