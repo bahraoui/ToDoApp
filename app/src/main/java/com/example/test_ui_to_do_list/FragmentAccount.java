@@ -65,7 +65,7 @@ public class FragmentAccount extends Fragment {
         super.onCreate(savedInstanceState);
         usersRef.get().addOnSuccessListener(getActivity(),queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
-                if(dcs.get("a",String.class).equals("")) {
+                if(dcs.get("idUsersAuth",String.class).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     prenomSTR = dcs.get("prenom", String.class);
                     nomSTR = dcs.get("nom", String.class);
                     emailSTR = dcs.get("email",String.class);
