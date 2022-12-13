@@ -305,12 +305,14 @@ public class activity_in_list extends AppCompatActivity {
         final EditText[] nameItem = new EditText[1];
         final CalendarView[] calendarView = new CalendarView[1];
         Button validationModifItem;
+        Button supressItems;
         popup_item.setContentView(R.layout.popup_item);
         popup_item.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         close = (TextView) popup_item.findViewById(R.id.popup_item_closeWindows);
         nameItem[0] = (EditText) popup_item.findViewById(R.id.popup_item_modification_et_name);
         calendarView[0] = (CalendarView) popup_item.findViewById(R.id.popup_item_simpleCalendarView);
         validationModifItem = (Button) popup_item.findViewById(R.id.pop_item_modification_btn_modify);
+        supressItems = (Button) popup_item.findViewById(R.id.pop_item_modification_btn_delete);
 
         nameItem[0].setText(itemSelectModif.getIt_Name());
         calendarView[0].setDate(itemSelectModif.getIt_ObjectifDate().getTime());
@@ -337,6 +339,10 @@ public class activity_in_list extends AppCompatActivity {
                     Toast.makeText(activity_in_list.this,afficher,Toast.LENGTH_SHORT).show();
                 }
             }
+        });
+        supressItems.setOnClickListener(v -> {
+            tda_liste.getLi_List().remove(itemSelectModif);
+            listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
         });
         popup_item.show();
     }
