@@ -221,7 +221,6 @@ public class activity_in_list extends AppCompatActivity {
                     tda_liste.getLi_List()) {
                 if(it.getId() == tda_item.getId()){
                     itemSelectModif = it;
-                    Toast.makeText(this,"added via id",Toast.LENGTH_SHORT).show();
                     break;
                 }
             }
@@ -277,13 +276,6 @@ public class activity_in_list extends AppCompatActivity {
                                     "\nli vrai nom "+tda_liste.getLi_Name()+
                                     "\nli id "+liste_tmp.getId()+
                                     "\nli vrai id "+tda_liste.getId();
-                            /*
-                            for (String x :
-                                    listeIdentifiantsUser_hashmap.keySet()) {
-                                Toast.makeText(List_Activity.this, "cle : "+x+" - valeur : "
-                                +listeIdentifiantsUser_hashmap.get(x), Toast.LENGTH_SHORT).show();
-
-                            }*/
                             if (liste_tmp != null && liste_tmp.getId()!=null && liste_tmp.getId().equals(tda_liste.getId())
                                 /* &&
                                     listeIdentifiantsUser_hashmap.get(liste_tmp.getId()) == mAuth.getCurrentUser().getUid()
@@ -337,7 +329,7 @@ public class activity_in_list extends AppCompatActivity {
                     listesRef.document(tda_liste.getId()).update("li_List",tda_liste.getLi_List());
                     popup_item.dismiss();
                 } else {
-                    String afficher = "aucun changement";
+                    String afficher = "aucun changement effectué";
                     Toast.makeText(activity_in_list.this,afficher,Toast.LENGTH_SHORT).show();
                 }
             }
@@ -387,7 +379,7 @@ public class activity_in_list extends AppCompatActivity {
             Drawable drawableListIcon2 = new BitmapDrawable(getResources(), tda_liste.getLi_drawable());
             if (tda_liste.getLi_Name().equals(newNameList)
                     && drawableListIcon2  == imgSelectionne.getDrawable()){
-                Toast.makeText(this,"aucun changement",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"aucun changement effectué",Toast.LENGTH_SHORT).show();
                 // afficher qu'il n'ya eu aucun changement
             } else {
                 tda_liste.setLi_Name(newNameList);

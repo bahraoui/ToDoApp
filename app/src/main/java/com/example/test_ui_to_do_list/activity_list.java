@@ -15,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -181,12 +180,6 @@ public class activity_list extends AppCompatActivity {
         isFirstLaunch.set(false);
         userListes.addSnapshotListener(activity_list.this, eventListenerUpdateListe);
         listesRef.addSnapshotListener(activity_list.this, eventListenerUpdateListe);
-            /*
-        } else {
-            Toast.makeText(this, "not first launch", Toast.LENGTH_SHORT).show();
-            //majUI();
-        }
-*/
     }
 
     private void addListUI(TDA_Liste tda_liste, ViewGroup main, boolean owner){
@@ -248,11 +241,6 @@ public class activity_list extends AppCompatActivity {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot dcs : queryDocumentSnapshots){
                             TDA_Liste liste_tmp = dcs.toObject(TDA_Liste.class);
-                            /* for (String x :
-                                    listeIdentifiantsUser_hashmap.keySet()) {
-                                Toast.makeText(List_Activity.this, "cle : "+x+" - valeur : "+listeIdentifiantsUser_hashmap.get(x), Toast.LENGTH_SHORT).show();
-
-                            }*/
                             if (liste_tmp != null
                                 // && listeIdentifiantsUser_hashmap.get(liste_tmp.getId()) == mAuth.getCurrentUser().getUid()
                             ){
@@ -305,14 +293,6 @@ public class activity_list extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         dbList = new DBHandlerList(this);
-        /*
-        if(isFirstLaunch.get()){
-            Toast.makeText(this, "first launch", Toast.LENGTH_SHORT).show();
-            isFirstLaunch.set(false);
-        } else {
-            Toast.makeText(this, "not first launch", Toast.LENGTH_SHORT).show();
-            majUI();
-        }*/
         majUI();
     }
 

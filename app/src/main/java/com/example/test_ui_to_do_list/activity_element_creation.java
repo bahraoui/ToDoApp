@@ -48,7 +48,6 @@ public class activity_element_creation extends AppCompatActivity {
         name_NewItem = findViewById(R.id.itemcreation_et_name);
         calendarView = findViewById(R.id.simpleCalendarView);
         calendarView.setOnDateChangeListener((calendarView, year, month, day) -> {
-            //Toast.makeText(getApplicationContext(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
             Calendar c = Calendar.getInstance();
             c.set(year, month, day);
             selectedDate = calendarToDate(c);
@@ -76,35 +75,6 @@ public class activity_element_creation extends AppCompatActivity {
 
 
     private TDA_Liste ajouterItem(){
-        /*
-        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
-            switch (which){
-                case DialogInterface.BUTTON_POSITIVE:
-                    isDateValid = true;
-                    break;
-
-                case DialogInterface.BUTTON_NEGATIVE:
-                    isDateValid = false;
-                    break;
-            }
-        };*/
-        /*
-        if(selectedDate.compareTo((Calendar.getInstance().getTime())) < 0){
-            Toast.makeText(this, "Veuillez sélectionner une date posterieure à celle actuelle",Toast.LENGTH_SHORT).show();
-            \/*
-            AlertDialog.Builder ab = new AlertDialog.Builder(this);
-            ab.setMessage("Vous allez sélectionner une date posterieure")
-                    .setPositiveButton("C'est ce que je veux", dialogClickListener)
-                    .setNegativeButton("Non je me suis trompé", dialogClickListener).show();
-            if (!isDateValid){
-                return;
-            } else{
-                Toast.makeText(this, "dans le esle", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            return;
-        }*/
-
         name_NewItem = findViewById(R.id.itemcreation_et_name);
         String name_item = name_NewItem.getText().toString();
 
@@ -115,10 +85,6 @@ public class activity_element_creation extends AppCompatActivity {
 
         TDA_Liste li = (TDA_Liste) getIntent().getSerializableExtra("tda_liste_ajout_item");
         li.addItem(new TDA_Item(name_item,selectedDate));
-
-
-        // ajout liste firebase
-        Toast.makeText(getApplicationContext(), "ajout item liste id "+li.getId()+"\nname : "+li.getLi_Name(), Toast.LENGTH_LONG).show();
         return li;
     }
 

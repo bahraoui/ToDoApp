@@ -115,26 +115,6 @@ public class activity_list_creation extends AppCompatActivity {
         TDA_Liste new_liste = new TDA_Liste(name_NewList, mAuth.getCurrentUser().getUid());
 
         // set icone
-        /*
-        StorageReference iconRef = storageRef.child("bitmap_icons/"+(String) imgSelectionne.getTag()+".jpg");
-        iconRef.getDownloadUrl()
-                // si le fichier n'existe pas
-                .addOnFailureListener(e -> {
-                    imgSelectionne.setDrawingCacheEnabled(true);
-                    imgSelectionne.buildDrawingCache();
-                    Bitmap bitmap = ((BitmapDrawable) imgSelectionne.getDrawable()).getBitmap();
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                    byte[] data = baos.toByteArray();
-                    iconRef.putBytes(data);
-                    Blob blob = Blob.fromBytes(data);
-                }).continueWith(task -> {
-                    iconRef.getBytes(1024 * 1024).addOnSuccessListener(b -> {
-                        //Drawable image = new BitmapDrawable(getResources(),BitmapFactory.decodeByteArray(b, 0, b.length));
-                        new_liste.setLi_drawable(Blob.fromBytes(b));
-                    }).continueWith(task1 -> {
-
-         */
         new_liste.setLi_drawable((String) imgSelectionne.getTag());
         // set liste id;
         new_liste.setId(id_liste);
@@ -148,7 +128,6 @@ public class activity_list_creation extends AppCompatActivity {
         identifiantsListe.put("ownerId",mAuth.getCurrentUser().getUid());
         refAdded.set(identifiantsListe);
         // listesRef.add(new TDA_Liste(name_NewList));
-        Toast.makeText(activity_list_creation.this, "liste  ajoutee", Toast.LENGTH_SHORT).show();
         dbList.close();
         finish();
                         /*
@@ -213,7 +192,6 @@ public class activity_list_creation extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         dbList.close();
-        //Toast.makeText(this, "onDestroy create activity", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -226,14 +204,6 @@ public class activity_list_creation extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         dbList = new DBHandlerList(this);
-        //Toast.makeText(this, "onResume create activity", Toast.LENGTH_SHORT).show();
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //Toast.makeText(this, "onPause create activity", Toast.LENGTH_SHORT).show();
     }
 
     @Override
