@@ -201,8 +201,6 @@ public class activity_list extends AppCompatActivity {
         } else {
             elementShared.setVisibility(View.VISIBLE);
         }
-        if(tda_liste.getLi_Name().equals("Courses"))
-            elementShared.setVisibility(View.VISIBLE);
 
 
         ConstraintLayout cl = view.findViewById(R.id.myView_list_constraintLayout);
